@@ -20,4 +20,9 @@ public class Person {
 	public void justSayHi() {
 		System.out.println(this.name + " says Hi!");
 	}
+
+	@Override
+	public String toString() {
+		return "Person [name=" + name + "]";
+	}
 }

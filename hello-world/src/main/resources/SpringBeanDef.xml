@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+
+	<util:list id="personList">
+		<bean class="us.supercheng.spring4.entity.Person">
+			<property name="name" value="Person B"></property>
+		</bean>
+		<bean class="us.supercheng.spring4.entity.Person">
+			<property name="name" value="Person C"></property>
+		</bean>
+	</util:list>
+	
+	<util:map id="personMap">
+		<entry key="111">
+			<bean class="us.supercheng.spring4.entity.Person">
+			<property name="name" value="Person A"></property>
+		</bean>
+		</entry>
+		<entry key="333">
+			<bean class="us.supercheng.spring4.entity.Person">
+			<property name="name" value="Person B"></property>
+		</bean>
+		</entry>
+		<entry key="555">
+			<bean class="us.supercheng.spring4.entity.Person">
+			<property name="name" value="Person C"></property>
+		</bean>
+		</entry>
+	</util:map>
+	
 
 	<bean id="person" class="us.supercheng.spring4.entity.Person">
 		<property name="name" value="Spring4"></property>
@@ -19,5 +51,44 @@
 		<constructor-arg value="X5" />
 		<constructor-arg value="260" type="int"  />
 	</bean>
-
+	
+	
+	<bean id="parkinglot1" class="us.supercheng.spring4.entity.ParkingLot">
+		<constructor-arg>
+			<bean class="us.supercheng.spring4.entity.Person">
+				<property name="name">
+					<value>Parking Lot King</value>
+				</property>
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<ref bean="car1"/>
+				<ref bean="car2"/>
+			</list>
+		</constructor-arg>
+		<property name="cars[0].brand">
+			<value><![CDATA[Whatever Goes Here]]></value>
+		</property>
+		<property name="manager.name" value="Parking Lot Queen"></property>
+	</bean>
+	
+	
+	<bean id="raceGame" class="us.supercheng.spring4.entity.RaceGame">
+		<constructor-arg name="id" value="1"></constructor-arg>
+		<constructor-arg ref="personMap" />
+	</bean>
+	
+	<bean id="dataSource" class="us.supercheng.spring4.entity.DataSource" p:dbId="12345">
+		<property name="propDB">
+			<props>
+				<prop key="username">root</prop>
+				<prop key="password">password</prop>
+				<prop key="url">jdbc:mysql://google.com</prop>
+				<prop key="driverClassName">com.mysql.jdbc.Driver</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
 </beans>

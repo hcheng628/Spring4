@@ -29,6 +29,38 @@ public class Car {
 		this.msrp = msrp;
 	}
 
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getMsrp() {
+		return msrp;
+	}
+
+	public void setMsrp(double msrp) {
+		this.msrp = msrp;
+	}
+
+	public int getTopSpeed() {
+		return topSpeed;
+	}
+
+	public void setTopSpeed(int topSpeed) {
+		this.topSpeed = topSpeed;
+	}
+
 	@Override
 	public String toString() {
 		return "Car [brand=" + brand + ", name=" + name + ", msrp=" + msrp + ", topSpeed=" + topSpeed + "]";
