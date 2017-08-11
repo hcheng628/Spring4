@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="phone" class="us.supercheng.spring4.entity.Phone" p:brand="Apple" p:name="iPhone 7">
+	</bean>
+	
+	<bean id="laptop" class="us.supercheng.spring4.entity.Laptop" p:brand="Apple" p:name="MacBook Pro 15 with Retina Display">
+	</bean>
+	
+	<!-- 
+	<bean id="backpack" class="us.supercheng.spring4.entity.Backpack" p:brand="Butterfly" p:phone-ref="phone" p:laptop-ref="laptop">
+	</bean>
+ 	-->
+ 	<!-- autowire byName using setter methods with bean id name if not found then null -->
+ 	<!-- autowire byType will throw exception if 2 same classes found so singleton only -->
+ 	<!-- autowire: either byName or byType cannot be both -->
+ 	<bean id="backpack" class="us.supercheng.spring4.entity.Backpack" p:brand="Butterfly" autowire="byType"></bean>
+ 	
+</beans>
