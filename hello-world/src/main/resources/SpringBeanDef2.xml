@@ -21,7 +21,7 @@
  	<!-- autowire byName using setter methods with bean id name if not found then null -->
  	<!-- autowire byType will throw exception if 2 same classes found so singleton only -->
  	<!-- autowire: either byName or byType cannot be both -->
- 	<bean id="backpack" class="us.supercheng.spring4.entity.Backpack" p:brand="Butterfly"></bean>
+ 	<bean id="backpack" class="us.supercheng.spring4.entity.Backpack" p:brand="Butterfly" autowire="byType"></bean>
  	
  	<bean id="dbSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  destroy-method="close">
  	 	<property name="user" value="${user}"></property>

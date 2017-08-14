@@ -7,6 +7,7 @@ public class Phone {
 	
 	public Phone(){
 		super();
+		System.out.println("Phone Constructor ... ");
 	}
 	
 	public Phone(String brand, String name){
