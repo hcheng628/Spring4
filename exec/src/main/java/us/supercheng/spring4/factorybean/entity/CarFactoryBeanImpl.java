@@ -19,6 +19,6 @@ public class CarFactoryBeanImpl implements FactoryBean<Car>{
 	}
 
 	public boolean isSingleton() {
-		return true;
+		return false;
 	}
 }
