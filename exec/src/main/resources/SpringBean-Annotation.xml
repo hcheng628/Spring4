@@ -11,8 +11,10 @@
 			use-default-filters="false"
 	>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="assignable" expression="us.supercheng.spring4.annotation.entity.Person" />
+		<!--context:include-filter type="assignable" expression="us.supercheng.spring4.annotation.entity.Person" />
+		<context:include-filter type="assignable" expression="us.supercheng.spring4.annotation.entity.Phone" /-->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
-		<context:include-filter type="assignable" expression="us.supercheng.spring4.annotation.service.UserServiceImpl" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 </beans>
