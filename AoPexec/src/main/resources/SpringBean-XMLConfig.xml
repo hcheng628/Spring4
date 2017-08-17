@@ -1,0 +1,29 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="loggingAspectXMLConfig" class="us.supercheng.spring4.aop.spring.aspect.LoggingAspectXMLConfig" ></bean>
+    <bean id="calImplXMLConfig" class="us.supercheng.spring4.aop.spring.service.CalImplXMLConfig" ></bean>
+    <bean id="highPriorityAspectXMLConfig" class="us.supercheng.spring4.aop.spring.aspect.HighPriorityAspectXMLConfig"></bean>
+
+
+    <aop:config>
+        <aop:pointcut id="calImplXMLConfigPointcut" expression="execution(* us.supercheng.spring4.aop.spring.service.CalImplXMLConfig.*(..))"></aop:pointcut>
+
+        <aop:aspect id="calImplXMLConfigAspect" ref="loggingAspectXMLConfig" order="1">
+            <aop:before method="doBefore" pointcut-ref="calImplXMLConfigPointcut"></aop:before>
+            <aop:after method="doAfter" pointcut-ref="calImplXMLConfigPointcut"></aop:after>
+            <aop:after-returning method="doAfterReturning" returning="retVal" pointcut-ref="calImplXMLConfigPointcut"></aop:after-returning>
+            <aop:after-throwing method="doAfterThrowing" throwing="customEx" pointcut-ref="calImplXMLConfigPointcut"></aop:after-throwing>
+        </aop:aspect>
+
+        <aop:aspect id="highPriorityAspectXMLConfigAspect" ref="highPriorityAspectXMLConfig" order="3">
+            <aop:around method="doAround"  pointcut-ref="calImplXMLConfigPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
