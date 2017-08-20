@@ -58,7 +58,6 @@ public class EmpDao {
         String q = "SELECT * FROM Emp WHERE id = :id;";
         Map<String, Object> inParamMap = new HashMap<String, Object>();
         inParamMap.put("id", inId);
-
         List<Emp> temp = this.namedParameterJdbcTemplate.query(q, inParamMap, new RowMapper<Emp>() {
             public Emp mapRow(ResultSet resultSet, int i) throws SQLException {
                 Emp emp = new Emp();
@@ -69,19 +68,23 @@ public class EmpDao {
                 return emp;
             }
         });
-
         return temp.get(0);
     }
 
-    public String updateEmp() {
-        String q = "UPDATE Emp SET fullname = ?, age = ?,  deptId = ? WHERE id = ?;";
-
-        return null;
+    public int updateEmp(Emp inEmp) {
+        String q = "UPDATE Emp SET fullname = :fullname, age = :age,  deptId = :deptId WHERE id = :id;";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("id",inEmp.getId());
+        params.put("fullname",inEmp.getFullName());
+        params.put("age",inEmp.getAge());
+        params.put("deptId",inEmp.getDeptId());
+        return this.namedParameterJdbcTemplate.update(q,params);
     }
 
-    public String delEmp() {
-        String q = "DELETE FROM Emp WHERE id = ?;";
-
-        return null;
+    public int delEmp(int inId) {
+        String q = "DELETE FROM Emp WHERE id = :id;";
+        Map<String, Object> params = new HashMap<String,Object>();
+        params.put("id", inId);
+        return this.namedParameterJdbcTemplate.update(q,params);
     }
 }

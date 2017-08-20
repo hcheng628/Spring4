@@ -14,13 +14,15 @@ public class App {
         EmpService empService = (EmpService) appContext.getBean("empService");
         // System.out.println(empService);
         Emp emp = new Emp();
-        emp.setId(3);
+        emp.setId(5);
         emp.setFullName("James");
         emp.setDeptId(3);
         emp.setAge(24);
 
-        System.out.println(empService.addEmpService(emp));
-        System.out.println(empService.getEmpService(1));
-
+        // CRUD Sample Test against DB
+        // System.out.println(empService.addEmpService(emp));
+        // System.out.println(empService.getEmpService(1));
+        // System.out.println(empService.updateEmpService(emp));
+        // System.out.println(empService.deleteEmpService(3));
     }
 }

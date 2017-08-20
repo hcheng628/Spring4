@@ -29,4 +29,12 @@ public class EmpService {
     public Emp getEmpService(int inId) {
         return this.empDao.getEmp(inId);
     }
+
+    public int updateEmpService(Emp inEmp) {
+        return this.empDao.updateEmp(inEmp);
+    }
+
+    public int deleteEmpService(int inId) {
+        return this.empDao.delEmp(inId);
+    }
 }
