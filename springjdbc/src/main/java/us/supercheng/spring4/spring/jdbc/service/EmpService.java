@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.supercheng.spring4.spring.jdbc.dao.EmpDao;
 import us.supercheng.spring4.spring.jdbc.entity.Emp;
+import java.util.List;
 
 @Service
 public class EmpService {
@@ -36,5 +37,17 @@ public class EmpService {
 
     public int deleteEmpService(int inId) {
         return this.empDao.delEmp(inId);
+    }
+
+    public int[] addEmpBatchService(List<Emp> inEmpList) {
+        return this.empDao.addEmpBatch(inEmpList);
+    }
+
+    public int[] updateEmpBatchService(List<Emp> inEmpList) {
+        return this.empDao.updateEmpBatch(inEmpList);
+    }
+
+    public int[] deleteEmpBatchService(int[] inEmpIdList) {
+        return this.empDao.delEmpBatch(inEmpIdList);
     }
 }

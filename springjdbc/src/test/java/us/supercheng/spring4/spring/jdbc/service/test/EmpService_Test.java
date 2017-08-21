@@ -8,6 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import us.supercheng.spring4.spring.jdbc.entity.Emp;
 import us.supercheng.spring4.spring.jdbc.service.EmpService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmpService_Test {
@@ -46,5 +49,55 @@ public class EmpService_Test {
     @Test
     public void d_delete_Emp_Service_Test() {
         this.empService.deleteEmpService(this.emp.getId());
+    }
+
+    @Test
+    public void e_add_Emp_Batch_Service_Test() {
+        Emp a = new Emp();
+        a.setFullName("AAA");
+        a.setDeptId(111);
+        a.setAge(11);
+        a.setId(111);
+
+        Emp b = new Emp();
+        b.setFullName("BBB");
+        b.setDeptId(222);
+        b.setAge(22);
+        b.setId(222);
+
+        List<Emp> empList = new ArrayList<Emp>();
+        empList.add(a);
+        empList.add(b);
+
+        int[] returnResult = this.empService.addEmpBatchService(empList);
+        System.out.println(Arrays.asList(returnResult));
+    }
+
+    @Test
+    public void f_update_Emp_Batch_Service_Test() {
+        Emp aUpdate = new Emp();
+        aUpdate.setFullName("new AAA");
+        aUpdate.setDeptId(111);
+        aUpdate.setAge(11);
+        aUpdate.setId(111);
+
+        Emp bUpdate = new Emp();
+        bUpdate.setFullName("new BBB");
+        bUpdate.setDeptId(222);
+        bUpdate.setAge(22);
+        bUpdate.setId(222);
+
+        List<Emp> empList = new ArrayList<Emp>();
+        empList.add(aUpdate);
+        empList.add(bUpdate);
+
+        int[] returnResult = this.empService.updateEmpBatchService(empList);
+        System.out.println(Arrays.asList(returnResult));
+    }
+
+    @Test
+    public void g_delete_Emp_Batch_Service_Test() {
+        int [] empIdList = {111, 222};
+        System.out.println(Arrays.asList(this.empService.deleteEmpBatchService(empIdList)));
     }
 }

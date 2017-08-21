@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import us.supercheng.spring4.spring.jdbc.entity.Emp;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -15,6 +14,13 @@ import java.util.Map;
 
 @Component
 public class EmpDao {
+
+    private final String Emp_Create_Query = "INSERT INTO Emp (fullname, id, age, deptId) VALUES ( :fullname, :id, :age, :deptId)";
+    private final String Emp_Retrieve_Query = "SELECT * FROM Emp WHERE id = :id;";
+    private final String Emp_Update_Query = "UPDATE Emp SET fullname = :fullname, age = :age,  deptId = :deptId WHERE id = :id;";
+    private final String  Emp_Delete_Query = "DELETE FROM Emp WHERE id = :id;";
+
+
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -42,23 +48,13 @@ public class EmpDao {
     }
 
     public int addEmp(Emp emp) {
-        String q = "USE I; INSERT INTO Emp " +
-                "(fullname, id, age, deptId) VALUES ( :fullname, :id, :age, :deptId)";
-        Map<String, Object> inParamMap = new HashMap<String, Object>();
-
-        inParamMap.put("fullname", emp.getFullName());
-        inParamMap.put("id", emp.getId());
-        inParamMap.put("age", emp.getAge());
-        inParamMap.put("deptId", emp.getDeptId());
-
-        return this.namedParameterJdbcTemplate.update(q,inParamMap);
+        return this.namedParameterJdbcTemplate.update(Emp_Create_Query,this.setEmpParams(emp));
     }
 
     public Emp getEmp(int inId) {
-        String q = "SELECT * FROM Emp WHERE id = :id;";
         Map<String, Object> inParamMap = new HashMap<String, Object>();
         inParamMap.put("id", inId);
-        List<Emp> temp = this.namedParameterJdbcTemplate.query(q, inParamMap, new RowMapper<Emp>() {
+        List<Emp> temp = this.namedParameterJdbcTemplate.query(Emp_Retrieve_Query, inParamMap, new RowMapper<Emp>() {
             public Emp mapRow(ResultSet resultSet, int i) throws SQLException {
                 Emp emp = new Emp();
                 emp.setAge(resultSet.getInt("age"));
@@ -72,19 +68,47 @@ public class EmpDao {
     }
 
     public int updateEmp(Emp inEmp) {
-        String q = "UPDATE Emp SET fullname = :fullname, age = :age,  deptId = :deptId WHERE id = :id;";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("id",inEmp.getId());
-        params.put("fullname",inEmp.getFullName());
-        params.put("age",inEmp.getAge());
-        params.put("deptId",inEmp.getDeptId());
-        return this.namedParameterJdbcTemplate.update(q,params);
+        return this.namedParameterJdbcTemplate.update(Emp_Update_Query, this.setEmpParams(inEmp));
     }
 
     public int delEmp(int inId) {
-        String q = "DELETE FROM Emp WHERE id = :id;";
         Map<String, Object> params = new HashMap<String,Object>();
         params.put("id", inId);
-        return this.namedParameterJdbcTemplate.update(q,params);
+        return this.namedParameterJdbcTemplate.update(Emp_Delete_Query, params);
+    }
+
+    public int[] addEmpBatch(List<Emp> inEmpList) {
+        Map<String, Object>[] paramList = new HashMap[inEmpList.size()];
+        for (int i=0;i<inEmpList.size();i++) {
+            paramList[i] = this.setEmpParams(inEmpList.get(i));
+        }
+        return namedParameterJdbcTemplate.batchUpdate(Emp_Create_Query, paramList);
+    }
+
+    public int[] updateEmpBatch(List<Emp> inEmpList) {
+        Map<String, Object>[] paramList = new HashMap[inEmpList.size()];
+        for (int i=0;i<inEmpList.size();i++) {
+            paramList[i] = this.setEmpParams(inEmpList.get(i));
+        }
+        return namedParameterJdbcTemplate.batchUpdate(Emp_Update_Query, paramList);
+    }
+
+    public int[] delEmpBatch(int [] inEmpIdList) {
+        Map<String, Object>[] paramList = new HashMap[inEmpIdList.length];
+        for (int i=0;i<inEmpIdList.length;i++) {
+            Map<String, Object> eachIdParam = new HashMap<String, Object>();
+            eachIdParam.put("id", inEmpIdList[i]);
+            paramList[i] = eachIdParam;
+        }
+        return this.namedParameterJdbcTemplate.batchUpdate(Emp_Delete_Query, paramList);
+    }
+
+    private Map<String, Object> setEmpParams(Emp inEmp) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("fullname",inEmp.getFullName());
+        params.put("id",inEmp.getId());
+        params.put("age",inEmp.getAge());
+        params.put("deptId",inEmp.getDeptId());
+        return params;
     }
 }
