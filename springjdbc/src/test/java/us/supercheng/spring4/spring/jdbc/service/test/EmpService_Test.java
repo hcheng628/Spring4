@@ -100,4 +100,10 @@ public class EmpService_Test {
         int [] empIdList = {111, 222};
         System.out.println(Arrays.asList(this.empService.deleteEmpBatchService(empIdList)));
     }
+
+    @Test
+    public void h_get_EmpList_ByDeptId_Service_Test() {
+        int deptId = 1;
+        System.out.println(Arrays.asList(this.empService.getEmpListByDeptIdService(deptId)));
+    }
 }

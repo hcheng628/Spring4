@@ -17,6 +17,8 @@ public class EmpDao {
 
     private final String Emp_Create_Query = "INSERT INTO Emp (fullname, id, age, deptId) VALUES ( :fullname, :id, :age, :deptId)";
     private final String Emp_Retrieve_Query = "SELECT * FROM Emp WHERE id = :id;";
+    private final String Emp_Retrieve_Query_By_DeptId = "SELECT * FROM Emp WHERE deptId = :deptId;";
+
     private final String Emp_Update_Query = "UPDATE Emp SET fullname = :fullname, age = :age,  deptId = :deptId WHERE id = :id;";
     private final String  Emp_Delete_Query = "DELETE FROM Emp WHERE id = :id;";
 
@@ -54,18 +56,16 @@ public class EmpDao {
     public Emp getEmp(int inId) {
         Map<String, Object> inParamMap = new HashMap<String, Object>();
         inParamMap.put("id", inId);
-        List<Emp> temp = this.namedParameterJdbcTemplate.query(Emp_Retrieve_Query, inParamMap, new RowMapper<Emp>() {
-            public Emp mapRow(ResultSet resultSet, int i) throws SQLException {
-                Emp emp = new Emp();
-                emp.setAge(resultSet.getInt("age"));
-                emp.setDeptId(resultSet.getInt("deptId"));
-                emp.setFullName(resultSet.getString("fullname"));
-                emp.setId(resultSet.getInt("id"));
-                return emp;
-            }
-        });
+        List<Emp> temp = this.namedParameterJdbcTemplate.query(Emp_Retrieve_Query, inParamMap, new Emp());
         return temp.get(0);
     }
+
+    public List<Emp> getEmpListByDeptId(int inDeptId) {
+        Map<String, Object> inParamMap = new HashMap<String, Object>();
+        inParamMap.put("deptId", inDeptId);
+        return this.namedParameterJdbcTemplate.query(Emp_Retrieve_Query_By_DeptId, inParamMap, new Emp());
+    }
+
 
     public int updateEmp(Emp inEmp) {
         return this.namedParameterJdbcTemplate.update(Emp_Update_Query, this.setEmpParams(inEmp));

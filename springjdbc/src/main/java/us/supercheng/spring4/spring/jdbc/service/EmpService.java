@@ -31,6 +31,10 @@ public class EmpService {
         return this.empDao.getEmp(inId);
     }
 
+    public List<Emp> getEmpListByDeptIdService(int inDeptId) {
+        return this.empDao.getEmpListByDeptId(inDeptId);
+    }
+
     public int updateEmpService(Emp inEmp) {
         return this.empDao.updateEmp(inEmp);
     }

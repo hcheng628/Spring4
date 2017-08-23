@@ -1,9 +1,13 @@
 package us.supercheng.spring4.spring.jdbc.entity;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 @Component
-public class Emp {
+public class Emp implements RowMapper<Emp> {
     private String fullName;
     private Integer id;
     private Integer age;
@@ -53,5 +57,14 @@ public class Emp {
                 ", age=" + age +
                 ", deptId=" + deptId +
                 '}';
+    }
+
+    public Emp mapRow(ResultSet resultSet, int i) throws SQLException {
+        Emp emp = new Emp();
+        emp.setAge(resultSet.getInt("age"));
+        emp.setDeptId(resultSet.getInt("deptId"));
+        emp.setFullName(resultSet.getString("fullname"));
+        emp.setId(resultSet.getInt("id"));
+        return emp;
     }
 }
