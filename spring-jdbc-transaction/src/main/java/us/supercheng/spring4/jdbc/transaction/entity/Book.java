@@ -4,7 +4,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Book implements RowMapper {
+public class Book implements RowMapper<Book> {
 
     private int id;
     private String isbn;
@@ -56,7 +56,7 @@ public class Book implements RowMapper {
         this.count = count;
     }
 
-    public Object mapRow(ResultSet resultSet, int i) throws SQLException {
+    public Book mapRow(ResultSet resultSet, int i) throws SQLException {
         Book book = new Book();
         book.setId(resultSet.getInt("id"));
         book.setIsbn(resultSet.getString("isbn"));
@@ -64,5 +64,16 @@ public class Book implements RowMapper {
         book.setPrice(resultSet.getDouble("price"));
         book.setCount(resultSet.getInt("count"));
         return book;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", count=" + count +
+                '}';
     }
 }
