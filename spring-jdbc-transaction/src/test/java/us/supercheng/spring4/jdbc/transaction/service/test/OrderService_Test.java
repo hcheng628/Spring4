@@ -24,6 +24,6 @@ public class OrderService_Test {
     @Test
     public void a_buyBooks_Service_Test() {
         // System.out.println();
-        this.orderService.buyBooksService(1,"cba-123-321-def",2);
+        this.orderService.buyBooksService(1,"cba-123-321-def",4);
     }
 }

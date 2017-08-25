@@ -2,12 +2,12 @@ package us.supercheng.spring4.jdbc.transaction.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import us.supercheng.spring4.jdbc.transaction.entity.Book;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+@Repository
 public class BookDaoImplDB implements IBookDao {
 
     private final String createBook_Query = "INSERT INTO Book (id, isbn, name, price, count) VALUES (:id, :isbn, :name, :price, :count);";

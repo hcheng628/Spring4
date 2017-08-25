@@ -7,4 +7,6 @@ public interface IBookService {
     Book getBookByIsbnService(String inIsbn);
     int updateBookByIsbnService(Book inBook);
     int delBookByIsbnService(String inIsbn);
+
+    int reduceBookCountByIsbn(Book inBook, int inCount);
 }

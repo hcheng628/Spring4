@@ -2,12 +2,12 @@ package us.supercheng.spring4.jdbc.transaction.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import us.supercheng.spring4.jdbc.transaction.entity.Customer;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+@Repository
 public class CustomerImplDB implements ICustomerDao {
 
     private final String createCustomer_Query = "INSERT INTO Customer (id, username, balance) VALUES ( :id, :username, :balance);";

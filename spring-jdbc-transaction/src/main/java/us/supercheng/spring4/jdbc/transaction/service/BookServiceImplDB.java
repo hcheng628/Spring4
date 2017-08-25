@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.supercheng.spring4.jdbc.transaction.dao.BookDaoImplDB;
 import us.supercheng.spring4.jdbc.transaction.entity.Book;
+import us.supercheng.spring4.jdbc.transaction.service.exception.BookServiceException;
 
 @Service
 public class BookServiceImplDB implements IBookService{
@@ -37,5 +38,17 @@ public class BookServiceImplDB implements IBookService{
 
     public int delBookByIsbnService(String inIsbn) {
         return this.bookDaoImplDB.deleteBookByIsbn(inIsbn);
+    }
+
+    public int reduceBookCountByIsbn(Book inBook, int inCount) {
+        Book book = this.bookDaoImplDB.retrieveBookByIsbn(inBook.getIsbn());
+        System.out.println("Buy Count: " + inCount + " Inventory Count: " + book.getCount());
+        if (inCount <= book.getCount()) {
+            book.setCount(book.getCount()- inCount);
+            this.bookDaoImplDB.updateBookByIsbn(book);
+        } else {
+            throw new BookServiceException("Insufficient Inventory");
+        }
+        return 1;
     }
 }

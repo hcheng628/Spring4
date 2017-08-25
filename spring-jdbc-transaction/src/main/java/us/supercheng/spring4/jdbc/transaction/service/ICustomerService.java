@@ -7,4 +7,6 @@ public interface ICustomerService {
     Customer getCustomerByIdService(int customerId);
     int updateCustomerByIdService(Customer inCustomer);
     int delCustomerByIdService(int customerId);
+
+    int reduceUserBalanceById(int userId, double totalPrice);
 }

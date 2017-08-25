@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.supercheng.spring4.jdbc.transaction.dao.CustomerImplDB;
 import us.supercheng.spring4.jdbc.transaction.entity.Customer;
+import us.supercheng.spring4.jdbc.transaction.service.exception.CustomerServiceException;
 
 @Service
 public class CustomerServiceImplDB implements ICustomerService {
@@ -33,5 +34,17 @@ public class CustomerServiceImplDB implements ICustomerService {
 
     public int delCustomerByIdService(int customerId) {
         return this.customerImplDB.deleteCustomerById(customerId);
+    }
+
+    public int reduceUserBalanceById(int userId, double totalPrice) {
+        Customer customer = this.customerImplDB.retrieveCustomerById(userId);
+        System.out.println("Total Price: " + totalPrice + " Total Balance: " + customer.getBalance());
+        if (totalPrice <= customer.getBalance()) {
+            customer.setBalance(customer.getBalance() - totalPrice);
+            this.customerImplDB.updateCustomerById(customer);
+        } else {
+            throw new CustomerServiceException("Insufficient Fund");
+        }
+        return 1;
     }
 }
