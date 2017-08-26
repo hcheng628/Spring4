@@ -24,7 +24,7 @@
         <constructor-arg ref="dbSourcePool" />
     </bean>
 
-    <context:component-scan base-package="us.supercheng.spring4.jdbc.transaction" ></context:component-scan>
+    <context:component-scan base-package="us.supercheng.spring4.jdbc.transaction.annoation" ></context:component-scan>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <constructor-arg name="dataSource" ref="dbSourcePool" ></constructor-arg>
