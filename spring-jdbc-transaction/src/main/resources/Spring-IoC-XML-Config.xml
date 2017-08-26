@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:property-placeholder location="DB.properties" />
+
+    <bean id="dbSourcePool" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="driverClass" value="${driverClass}"></property>
+        <property name="jdbcUrl" value="${jdbcUrl}"></property>
+        <property name="maxPoolSize" value="${maxPoolSize}"></property>
+        <property name="minPoolSize" value="${minPoolSize}"></property>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dbSourcePool" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg name="dataSource" ref="dbSourcePool" ></constructor-arg>
+    </bean>
+
+    <!-- Daos -->
+    <bean id="bookDaoDB" class="us.supercheng.spring4.jdbc.transaction.xml.dao.impl.BookDaoImplDB">
+        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"></property>
+    </bean>
+    <bean id="customerDB" class="us.supercheng.spring4.jdbc.transaction.xml.dao.impl.CustomerImplDB">
+        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"></property>
+    </bean>
+
+    <bean id="orderServiceDao" class="us.supercheng.spring4.jdbc.transaction.xml.dao.impl.OrderServiceDaoImpl">
+        <property name="bookServiceImplDB" ref="bookServiceDB" ></property>
+        <property name="customerServiceImplDB" ref="customerServiceDB" ></property>
+    </bean>
+
+    <!-- Services -->
+    <bean id="bookServiceDB" class="us.supercheng.spring4.jdbc.transaction.xml.service.impl.BookServiceImplDB">
+        <property name="bookDaoImplDB" ref="bookDaoDB"></property>
+    </bean>
+
+    <bean id="customerServiceDB" class="us.supercheng.spring4.jdbc.transaction.xml.service.impl.CustomerServiceImplDB">
+        <property name="customerImplDB" ref="customerDB" ></property>
+    </bean>
+
+    <bean id="orderService" class="us.supercheng.spring4.jdbc.transaction.xml.service.impl.OrderServiceImpl">
+        <property name="orderServiceDao" ref="orderServiceDao"></property>
+    </bean>
+
+
+    <!-- Transactional Proxy Cast Error -->
+    <aop:config proxy-target-class="true"></aop:config>
+
+</beans>

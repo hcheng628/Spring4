@@ -1,15 +1,13 @@
 package us.supercheng.spring4.jdbc.transaction.xml.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
-import us.supercheng.spring4.jdbc.transaction.annoation.dao.IBookDao;
-import us.supercheng.spring4.jdbc.transaction.annoation.entity.Book;
+import us.supercheng.spring4.jdbc.transaction.xml.dao.IBookDao;
+import us.supercheng.spring4.jdbc.transaction.xml.entity.Book;
+
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
 public class BookDaoImplDB implements IBookDao {
 
     private final String createBook_Query = "INSERT INTO Book (id, isbn, name, price, count) VALUES (:id, :isbn, :name, :price, :count);";
@@ -17,7 +15,6 @@ public class BookDaoImplDB implements IBookDao {
     private final String updateBookByIsbn_Query = "UPDATE Book SET id = :id, name = :name, price = :price, count = :count WHERE isbn =:isbn;";
     private final String deleteBookByIsbn_Query = "DELETE FROM Book WHERE isbn =:isbn;";
 
-    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public BookDaoImplDB() {

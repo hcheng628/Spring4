@@ -1,6 +1,6 @@
 package us.supercheng.spring4.jdbc.transaction.xml.dao;
 
-import us.supercheng.spring4.jdbc.transaction.annoation.entity.Book;
+import us.supercheng.spring4.jdbc.transaction.xml.entity.Book;
 
 public interface IBookDao {
     int createBook(Book inBook);

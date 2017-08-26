@@ -1,15 +1,12 @@
 package us.supercheng.spring4.jdbc.transaction.xml.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
-import us.supercheng.spring4.jdbc.transaction.annoation.dao.ICustomerDao;
-import us.supercheng.spring4.jdbc.transaction.annoation.entity.Customer;
+import us.supercheng.spring4.jdbc.transaction.xml.dao.ICustomerDao;
+import us.supercheng.spring4.jdbc.transaction.xml.entity.Customer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
 public class CustomerImplDB implements ICustomerDao {
 
     private final String createCustomer_Query = "INSERT INTO Customer (id, username, balance) VALUES ( :id, :username, :balance);";
@@ -17,7 +14,6 @@ public class CustomerImplDB implements ICustomerDao {
     private final String updateCustomerById_Query = "UPDATE Customer SET username = :username, balance = :balance WHERE id = :id";
     private final String deleteCustomerById_Query = "DELETE FROM Customer WHERE id = :id";
 
-    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public CustomerImplDB() {

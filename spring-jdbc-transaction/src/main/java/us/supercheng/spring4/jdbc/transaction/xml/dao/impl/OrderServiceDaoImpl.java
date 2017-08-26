@@ -1,18 +1,14 @@
 package us.supercheng.spring4.jdbc.transaction.xml.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import us.supercheng.spring4.jdbc.transaction.annoation.dao.IOrderServiceDao;
-import us.supercheng.spring4.jdbc.transaction.annoation.entity.Book;
-import us.supercheng.spring4.jdbc.transaction.annoation.service.BookServiceImplDB;
-import us.supercheng.spring4.jdbc.transaction.annoation.service.CustomerServiceImplDB;
 
-@Repository
+import us.supercheng.spring4.jdbc.transaction.xml.dao.IOrderServiceDao;
+import us.supercheng.spring4.jdbc.transaction.xml.entity.Book;
+import us.supercheng.spring4.jdbc.transaction.xml.service.impl.BookServiceImplDB;
+import us.supercheng.spring4.jdbc.transaction.xml.service.impl.CustomerServiceImplDB;
+
 public class OrderServiceDaoImpl implements IOrderServiceDao {
 
-    @Autowired
     private CustomerServiceImplDB customerServiceImplDB;
-    @Autowired
     private BookServiceImplDB bookServiceImplDB;
 
     public OrderServiceDaoImpl () {

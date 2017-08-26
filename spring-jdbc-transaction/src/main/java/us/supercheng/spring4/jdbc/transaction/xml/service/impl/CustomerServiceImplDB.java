@@ -1,16 +1,13 @@
 package us.supercheng.spring4.jdbc.transaction.xml.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import us.supercheng.spring4.jdbc.transaction.annoation.dao.CustomerImplDB;
-import us.supercheng.spring4.jdbc.transaction.annoation.entity.Customer;
-import us.supercheng.spring4.jdbc.transaction.annoation.service.ICustomerService;
-import us.supercheng.spring4.jdbc.transaction.annoation.service.exception.CustomerServiceException;
 
-@Service
+import us.supercheng.spring4.jdbc.transaction.xml.dao.impl.CustomerImplDB;
+import us.supercheng.spring4.jdbc.transaction.xml.entity.Customer;
+import us.supercheng.spring4.jdbc.transaction.xml.service.ICustomerService;
+import us.supercheng.spring4.jdbc.transaction.xml.service.exception.CustomerServiceException;
+
 public class CustomerServiceImplDB implements ICustomerService {
 
-    @Autowired
     private CustomerImplDB customerImplDB;
 
     public CustomerImplDB getCustomerImplDB() {

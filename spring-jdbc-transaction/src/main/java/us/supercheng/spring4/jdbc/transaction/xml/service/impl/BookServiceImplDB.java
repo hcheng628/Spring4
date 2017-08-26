@@ -1,16 +1,13 @@
 package us.supercheng.spring4.jdbc.transaction.xml.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import us.supercheng.spring4.jdbc.transaction.annoation.dao.BookDaoImplDB;
-import us.supercheng.spring4.jdbc.transaction.annoation.entity.Book;
-import us.supercheng.spring4.jdbc.transaction.annoation.service.IBookService;
-import us.supercheng.spring4.jdbc.transaction.annoation.service.exception.BookServiceException;
 
-@Service
+import us.supercheng.spring4.jdbc.transaction.xml.dao.impl.BookDaoImplDB;
+import us.supercheng.spring4.jdbc.transaction.xml.entity.Book;
+import us.supercheng.spring4.jdbc.transaction.xml.service.IBookService;
+import us.supercheng.spring4.jdbc.transaction.xml.service.exception.BookServiceException;
+
 public class BookServiceImplDB implements IBookService {
 
-    @Autowired
     private BookDaoImplDB bookDaoImplDB;
 
     public BookServiceImplDB() {
