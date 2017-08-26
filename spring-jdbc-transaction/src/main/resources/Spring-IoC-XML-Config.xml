@@ -54,6 +54,19 @@
         <property name="orderServiceDao" ref="orderServiceDao"></property>
     </bean>
 
+    <!-- Defination Transaction -->
+    <tx:advice id="transactionInterceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+
+            <tx:method name="*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- Defination AOP -->
+    <aop:config>
+        <aop:pointcut id="transactionManagerAop" expression="execution(* us.supercheng.spring4.jdbc.transaction.xml.service.impl.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="transactionInterceptor" pointcut-ref="transactionManagerAop"></aop:advisor>
+    </aop:config>
 
     <!-- Transactional Proxy Cast Error -->
     <aop:config proxy-target-class="true"></aop:config>
