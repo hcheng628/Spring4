@@ -18,12 +18,10 @@ public class OrderService_Test {
     public void warmUp() {
         this.appContext = new ClassPathXmlApplicationContext("Spring-IoC-Config.xml");
         this.orderService = (OrderServiceImpl) this.appContext.getBean("orderServiceImpl");
-        System.out.println(this.orderService);
     }
 
     @Test
     public void a_buyBooks_Service_Test() {
-        // System.out.println();
         this.orderService.buyBooksService(1,"cba-123-321-def",4);
     }
 }
