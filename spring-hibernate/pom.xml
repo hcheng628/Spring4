@@ -15,7 +15,7 @@
         <hibernate-version>4.3.3.Final</hibernate-version>
         <hibernate-commons-annotations-version>4.0.2.Final</hibernate-commons-annotations-version>
         <javassist-version>3.20.0-GA</javassist-version>
-        <jboss-transaction-api_1.1_spec-version>1.0.1.Final-redhat-3</jboss-transaction-api_1.1_spec-version>
+        <jboss-transaction-api_1.1_spec-version>1.0.1.Final</jboss-transaction-api_1.1_spec-version>
         <jboss-logging-version>3.3.0.Final</jboss-logging-version>
         <antlr-version>2.7.7</antlr-version>
         <dom4j-version>1.6.1</dom4j-version>
@@ -122,6 +122,11 @@
             <version>${spring-version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
 
         <dependency>
             <groupId>commons-logging</groupId>
