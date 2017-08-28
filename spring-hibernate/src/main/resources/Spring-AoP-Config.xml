@@ -20,6 +20,10 @@
         <property name="minPoolSize" value="${minPoolSize}"></property>
     </bean>
 
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dbSourcePool" />
+    </bean>
+
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dbSourcePool" ></property>
         <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
@@ -30,23 +34,25 @@
         </property>
     </bean>
 
-
-    <!-- Daos -->
-
-
-    <!-- Services -->
-
-
-    <!-- Defination Transaction -->
-
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <!-- Defination AOP -->
+    <!-- Daos & Services -->
+    <context:component-scan base-package="us.supercheng.spring4.spring.hibernate"></context:component-scan>
 
 
-    <!-- Transactional Proxy Cast Error -->
-    <aop:config proxy-target-class="true"></aop:config>
+    <!-- Defination AOP  with Transactional Proxy Cast Error -->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="transactionPointcut" expression="execution(* us.supercheng.spring4.spring.hibernate.service.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="transactionInterceptor" pointcut-ref="transactionPointcut"></aop:advisor>
+    </aop:config>
+
+    <!-- Defination Transaction -->
+    <tx:advice id="transactionInterceptor" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
 
 </beans>

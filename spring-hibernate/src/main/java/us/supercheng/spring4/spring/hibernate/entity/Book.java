@@ -2,8 +2,8 @@ package us.supercheng.spring4.spring.hibernate.entity;
 
 public class Book {
 
-    private int id;
     private String isbn;
+    private int id;
     private String name;
     private double price;
     private int count;
