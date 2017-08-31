@@ -1,0 +1,6 @@
+us\supercheng\spring4\spring\struts2\service\impl\ProductServiceImpl.class
+us\supercheng\spring4\spring\struts2\struts\action\ProductAction.class
+us\supercheng\spring4\spring\struts2\entity\Product.class
+us\supercheng\spring4\spring\struts2\dao\IProductDao.class
+us\supercheng\spring4\spring\struts2\dao\impl\ProductDaoImpl.class
+us\supercheng\spring4\spring\struts2\service\IProductService.class
