@@ -11,7 +11,9 @@
         Product product = applicationContext.getBean(Product.class);
         IProductService productService = applicationContext.getBean(ProductServiceImpl.class);
     %>
-    <h3><%  response.getWriter().println(product.toString()); %></h3>
-    <h3><%  response.getWriter().println(productService.toString()); %></h3>
+<hr>
+<h3><%  response.getWriter().println(product.toString()); %></h3>
+<hr>
+<h3><%  response.getWriter().println(productService.toString()); %></h3>
 </body>
 </html>

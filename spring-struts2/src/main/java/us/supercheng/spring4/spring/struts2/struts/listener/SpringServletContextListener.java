@@ -24,8 +24,10 @@ public class SpringServletContextListener implements ServletContextListener, Htt
          initialized(when the Web application is deployed). 
          You can initialize servlet context related data here.
       */
-            ApplicationContext applicationContext = new ClassPathXmlApplicationContext("IoC-Config.xml");
-            sce.getServletContext().setAttribute("applicationContext", applicationContext);
+        String configFile = sce.getServletContext().getInitParameter("springConfigFile");
+        System.out.println("Config Files: " + configFile);
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configFile);
+        sce.getServletContext().setAttribute("applicationContext", applicationContext);
 
     }
 
