@@ -34,6 +34,7 @@
     <struts2-core-version>2.5</struts2-core-version>
     <xwork-core-version>2.3.28</xwork-core-version>
     <!-- Struts2 End -->
+    <javax.servlet-api-version>3.1.0</javax.servlet-api-version>
   </properties>
   <build>
     <finalName>spring-struts2</finalName>
@@ -234,6 +235,13 @@
       <groupId>com.mchange</groupId>
       <artifactId>c3p0</artifactId>
       <version>${c3p0-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${javax.servlet-api-version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
