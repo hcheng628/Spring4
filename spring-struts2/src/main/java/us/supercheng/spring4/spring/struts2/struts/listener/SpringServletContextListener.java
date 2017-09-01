@@ -14,6 +14,7 @@ public class SpringServletContextListener implements ServletContextListener, Htt
 
     // Public constructor is required by servlet spec
     public SpringServletContextListener() {
+
     }
 
     // -------------------------------------------------------
