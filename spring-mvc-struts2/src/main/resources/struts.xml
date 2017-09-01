@@ -5,7 +5,7 @@
 <struts>
 
     <package name="productAction" namespace="/product" extends="struts-default">
-        <action name="Check" class="us.supercheng.spring4.spring.springmvc.struts2.struts.action.ProductAction">
+        <action name="Check" class="productAction">
             <result name="product">success.jsp</result>
         </action>
     </package>

@@ -6,8 +6,8 @@
 
   <!-- Spring Config Start -->
   <context-param>
-    <param-name>springConfigFile</param-name>
-    <param-value>IoC-Config.xml</param-value>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:IoC-Config.xml</param-value>
   </context-param>
   <!-- Spring Config End -->
 
@@ -21,6 +21,10 @@
     <filter-name>struts2</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
   <!-- Dont need it with SpringMVC-->
   <!-- listener>

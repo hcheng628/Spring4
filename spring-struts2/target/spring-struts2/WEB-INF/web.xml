@@ -12,7 +12,6 @@
   </context-param>
   <!-- Spring Config End -->
 
-
   <!-- struts2 Config  Start -->
   <filter>
     <filter-name>struts2</filter-name>
@@ -28,5 +27,4 @@
     <listener-class>us.supercheng.spring4.spring.struts2.struts.listener.SpringServletContextListener</listener-class>
   </listener>
   <!-- struts2 Config  Start -->
-
 </web-app>
