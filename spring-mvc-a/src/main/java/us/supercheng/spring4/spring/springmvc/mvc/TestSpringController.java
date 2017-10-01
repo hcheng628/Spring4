@@ -2,6 +2,7 @@ package us.supercheng.spring4.spring.springmvc.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import us.supercheng.spring4.spring.springmvc.entity.User;
 
 /**
  * Created by supercheng on 9/25/17.
@@ -83,6 +84,12 @@ public class TestSpringController {
     @RequestMapping(value = "/sampleRest/api/{id}", method = RequestMethod.DELETE)
     public String apiDelete(@PathVariable("id") String id) {
         System.out.println("apiDelete called: " + id);
+        return "success";
+    }
+
+    @RequestMapping(value = "/formToObject", method = RequestMethod.POST)
+    public String htmlFormToPojo(User inUser) {
+        System.out.println("POJO: User: " + inUser);
         return "success";
     }
 

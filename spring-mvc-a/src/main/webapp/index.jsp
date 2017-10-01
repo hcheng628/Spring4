@@ -55,5 +55,48 @@
     <a href="apis/serverSampleCookieValue">Test CookieValue - GET</a>
     <hr>
 
+    <form action="apis/formToObject" METHOD="post">
+        <table>
+            <tr>
+                <td>
+                    Username:
+                </td>
+                <td>
+                    <input type="text" name="username">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password:
+                </td>
+                <td>
+                    <input type="password" name="password">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    City:
+                </td>
+                <td>
+                    <input type="text" name="address.city">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    State:
+                </td>
+                <td>
+                    <input type="text" name="address.state">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Go From to POJO">
+                </td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
