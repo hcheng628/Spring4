@@ -1,9 +1,7 @@
 package us.supercheng.spring4.spring.springmvc.mvc;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by supercheng on 9/25/17.
@@ -40,6 +38,25 @@ public class TestSpringController {
     @RequestMapping(value ="/serverSampleWild*/{id}", method = RequestMethod.GET)
     public String sampleWildCardwithId(@PathVariable("id") String id){
         System.out.println("sampleWildCardwithId Called and ID: " + id);
+        return "success";
+    }
+
+    @RequestMapping(value = "/serverSampleRequestParams", method = RequestMethod.GET)
+    public String sampleRequestParams(@RequestParam(name = "name", required = true) String name,
+                              @RequestParam(name="age", required = false, defaultValue = "0") int age) {
+        System.out.println("Name: " + name + " Age: " + age);
+        return "success";
+    }
+
+    @RequestMapping(value = "/serverSampleHeaderParams")
+    public String sampleHeaderParams(@RequestHeader(name = "Referer") String referer) {
+        System.out.println("Request Referer: " + referer);
+        return "success";
+    }
+
+    @RequestMapping(value = "/serverSampleCookieValue")
+    public String sampleCookieVal(@CookieValue(name = "JSESSIONID", required = false) String jSESSIONID) {
+        System.out.println("JSESSIONID: " + jSESSIONID);
         return "success";
     }
 

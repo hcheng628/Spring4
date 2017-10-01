@@ -48,5 +48,12 @@
     </form>
     <hr>
 
+    <a href="apis/serverSampleRequestParams?name=Cheng">Test RequestParam - GET</a>
+    <hr>
+    <a href="apis/serverSampleHeaderParams">Test RequestHeader - GET</a>
+    <hr>
+    <a href="apis/serverSampleCookieValue">Test CookieValue - GET</a>
+    <hr>
+
 </body>
 </html>
