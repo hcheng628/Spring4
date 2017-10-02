@@ -12,7 +12,39 @@
 </head>
 <body>
     <div>
-        <span>ModelAndView name: ${ requestScope.name }</span>
+        <span>
+            ModelAndView name: ${ requestScope.name }
+        </span>
+    </div>
+    <hr>
+    <div>
+        <span>
+            Map Current Time: ${ requestScope.current_time }
+        </span>
+    </div>
+    <div>
+        <span>
+            RequestScope: ${ requestScope.coffee }
+        </span>
+    </div>
+
+    <div>
+        <span>
+            SessionScope: ${ sessionScope.coffee }
+        </span>
+    </div>
+
+    <div>
+        <span>
+            SessionScope pet: ${ sessionScope.pet }
+        </span>
+    </div>
+
+
+    <div>
+        <span>
+            SessionScope java: ${ sessionScope.java }
+        </span>
     </div>
 </body>
 </html>

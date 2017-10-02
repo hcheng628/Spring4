@@ -102,6 +102,16 @@
 
     <a href="apis/doServletAPI">Servlet API - GET</a>
     <hr>
+    
     <a href="apis/doSpringModelAndView">ModelAndView - GET</a>
+    <hr>
+
+    <a href="apis/doSpringMap">Map - GET</a>
+    <hr>
+
+    <a href="apis/doSpringSessionAttr">SessionAttributes - GET</a>
+    <hr>
+
+    <a href="apis/doHttpSessionRequiredException">Do HttpSessionRequiredException - GET</a>
 </body>
 </html>
