@@ -98,5 +98,8 @@
             </tr>
         </table>
     </form>
+    <hr>
+
+    <a href="apis/doServletAPI">Servlet API - GET</a>
 </body>
 </html>
