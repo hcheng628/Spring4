@@ -67,4 +67,16 @@ public class TestSpringModel {
     public String goToCustomView() {
         return "customView";
     }
+
+    @RequestMapping("/forward")
+    public String forwardCustomView() {
+        System.out.println("forwardCustomView......");
+        return "forward:/apis/goToCustomView";
+    }
+
+    @RequestMapping("/redirect")
+    public String redirectCustomView() {
+        System.out.println("redirectCustomView......");
+        return "redirect:/apis/goToCustomView";
+    }
 }
