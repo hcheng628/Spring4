@@ -62,4 +62,9 @@ public class TestSpringModel {
         model.addAttribute("chicco", chiccoValue);
         return "model-success";
     }
+
+    @RequestMapping("/goToCustomView")
+    public String goToCustomView() {
+        return "customView";
+    }
 }

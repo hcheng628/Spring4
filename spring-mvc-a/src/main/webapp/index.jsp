@@ -33,7 +33,12 @@
     </table>
     <hr>
 
-    <a href="success">Simple Go To Success</a>
+    <a href="success">Simple GoTo -> Success</a>
+    <hr>
+
+    <a href="apis/goToCustomView">
+        GoTo -> Custom View
+    </a>
     <hr>
 
     <a href="apis/chicco">Get Chicco SysPropVal - GET</a>
