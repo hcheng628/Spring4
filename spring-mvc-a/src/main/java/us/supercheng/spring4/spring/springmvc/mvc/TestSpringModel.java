@@ -53,4 +53,13 @@ public class TestSpringModel {
         System.out.println("doHttpSessionRequiredException: " + java);
         return "model-success";
     }
+
+    @RequestMapping("/chicco")
+    public String findWebLogicArgChicco(Model model) {
+        String chiccoValue = System.getProperty("cfj.chicco.prop");
+        System.out.println("Chicco Value: " + chiccoValue);
+        System.out.println("Mr. " + System.getProperty("name"));
+        model.addAttribute("chicco", chiccoValue);
+        return "model-success";
+    }
 }

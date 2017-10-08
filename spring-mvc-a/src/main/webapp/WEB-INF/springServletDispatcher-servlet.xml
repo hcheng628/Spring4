@@ -15,4 +15,8 @@
         </property>
     </bean>
 
+    <bean id="resourceBundleMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="localMsg" />
+    </bean>
+
 </beans>

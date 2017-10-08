@@ -13,6 +13,11 @@
 <body>
     <div>
         <span>
+            Chicco WebLogic Value: ${ requestScope.chicco }
+        </span>
+    </div>
+    <div>
+        <span>
             ModelAndView name: ${ requestScope.name }
         </span>
     </div>

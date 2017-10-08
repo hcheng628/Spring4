@@ -1,6 +1,36 @@
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="utf-8" contentType="text/html;charset=utf-8" %>
 <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
 <body>
     <h3>Server Status</h3>
+    
+    <h5>Localization</h5>
+    <table border="1">
+        <tr>
+            <td>
+                <fmt:message key="username" />
+            </td>
+            <td>
+                <input type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <fmt:message key="password" />
+            </td>
+            <td>
+                <input type="password">
+            </td>
+        </tr>
+    </table>
+    <hr>
+
+    <a href="apis/chicco">Get Chicco SysPropVal - GET</a>
+    <hr>
+
     <a href="apis/serverStatus">Go Success - GET</a>
     <hr>
 
