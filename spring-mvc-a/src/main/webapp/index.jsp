@@ -7,8 +7,13 @@
 <body>
     <h3>Server Status</h3>
     
-    <h5>Localization</h5>
+
     <table border="1">
+        <tr>
+            <th>
+                Localization
+            </th>
+        </tr>
         <tr>
             <td>
                 <fmt:message key="username" />
@@ -26,6 +31,9 @@
             </td>
         </tr>
     </table>
+    <hr>
+
+    <a href="success">Simple Go To Success</a>
     <hr>
 
     <a href="apis/chicco">Get Chicco SysPropVal - GET</a>
