@@ -1,0 +1,55 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Spring-MVC-B",
+		"_postman_id": "abde609a-241c-0233-4aca-fe7e58633d72",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Del Emp",
+			"request": {
+				"url": "http://localhost:8080/spring-mvc-b/api/rest/delEmp/13",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Emp",
+			"request": {
+				"url": "http://localhost:8080/spring-mvc-b/api/rest/updateEmp/13",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Emp",
+			"request": {
+				"url": "http://localhost:8080/spring-mvc-b/api/rest/getEmp/13",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add Emp",
+			"request": {
+				"url": "http://localhost:8080/spring-mvc-b/api/rest/addEmp",
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

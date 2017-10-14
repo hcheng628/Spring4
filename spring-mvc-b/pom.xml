@@ -37,7 +37,7 @@
     <hamcrest-library.version>1.3</hamcrest-library.version>
   </properties>
   <build>
-    <finalName>BMW-CFProxy</finalName>
+    <finalName>spring-mvc-b</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

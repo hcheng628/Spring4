@@ -1,6 +1,5 @@
 package us.supercheng.spring.spring4.springmvc.dao;
 
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
