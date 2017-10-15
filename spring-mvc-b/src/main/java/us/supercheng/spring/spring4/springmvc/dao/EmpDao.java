@@ -67,9 +67,14 @@ public class EmpDao {
         for (Emp each : this.empList) {
             if(each.getId().equalsIgnoreCase(empId)) {
                 this.empList.remove(each);
+                System.out.println("Emp List Size: " + this.empList.size());
                 return each.getId();
             }
         }
         return null;
+    }
+
+    public List<Emp> getEmpListDao() {
+        return this.empList;
     }
 }
