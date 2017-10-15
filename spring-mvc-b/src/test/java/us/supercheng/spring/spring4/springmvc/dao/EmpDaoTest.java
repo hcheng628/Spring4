@@ -16,7 +16,7 @@ import us.supercheng.spring.spring4.springmvc.entity.Emp;
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @ContextConfiguration(classes = {AppConfig.class})
-public class DaoTest {
+public class EmpDaoTest {
 
     @Autowired
     public EmpDao empDao;

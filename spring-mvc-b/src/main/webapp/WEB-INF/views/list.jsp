@@ -10,7 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-
+<body>
 <script type="text/javascript">
     if (typeof jQuery == 'undefined') {
         alert("jQuery library is not found!");
@@ -74,6 +74,9 @@
 				<div class="form-group">
 					<a class="form-control btn btn-info" onclick="test()">Reset</a>
 				</div>
+				<div class="form-group">
+					<a class="form-control btn btn-secondary" href="createEmp">Create Employee</a>
+				</div>
 			</form>
 			<table class="table table-hover">
 				<tr class="empRecordHeader">
@@ -127,6 +130,5 @@
 		</div>
 	</div>
 </div>
-<body>
 </body>
 </html>
