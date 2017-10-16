@@ -1,12 +1,14 @@
 package us.supercheng.spring.spring4.springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import us.supercheng.spring.spring4.springmvc.entity.Dept;
 import us.supercheng.spring.spring4.springmvc.entity.Emp;
 import us.supercheng.spring.spring4.springmvc.service.DeptService;
 import us.supercheng.spring.spring4.springmvc.service.EmpService;
+import java.util.Map;
 
 @RequestMapping("/api/rest")
 @RestController
@@ -17,6 +19,15 @@ public class EmpController {
 
     @Autowired
     private DeptService deptService;
+
+    @ModelAttribute
+    public void getEmp(@RequestParam(value = "id", required = false) Integer id,
+                       Map<String, Object> map) {
+        System.out.println("ModelAttribute Triggered");
+        if(id != null) {
+            map.put("emp", this.empService.getEmp(id+""));
+        }
+    }
 
 
     //@PostMapping("/addEmp")
@@ -40,11 +51,24 @@ public class EmpController {
         return empService.getEmpJSON(id);
     }
 
-    @PutMapping("/updateEmp/{id}")
-    //@RequestMapping(value = "/updateEmp/{id}", method = RequestMethod.PUT)
-    public String updateEmp(@PathVariable String id, Emp emp) {
-        System.out.println("RequestMethod.PUT" + emp);
-        return this.empService.updateEmp(emp);
+    /*
+        Emp as InputPara works for POST not PUT ;-(
+     */
+
+    //@PutMapping("/updateEmp/{id}")
+    @RequestMapping(value = "/updateEmp/{id}", method = RequestMethod.PUT)
+    public String updateEmp(@PathVariable("id") String id,
+                            @RequestBody MultiValueMap<String, String> body) {
+        Dept updateDept = null;
+        for (Dept each : this.deptService.getAllDepts()) {
+            if ( each.getDeptId().equalsIgnoreCase(body.getFirst("empDept.deptId"))) {
+                updateDept = each;
+            }
+        }
+        Emp updateEmp = new Emp(id, body.getFirst("firstName"),body.getFirst("lastName"),
+                body.getFirst("email"), Integer.parseInt(body.getFirst("gender")), updateDept);
+        System.out.println("Update Controller: " + updateEmp);
+        return this.empService.updateEmp(updateEmp);
     }
 
     @DeleteMapping("/delEmp/{id}")

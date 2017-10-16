@@ -18,15 +18,16 @@
 <body>
 <script type="text/javascript">
 	var updateCall = function (empId) {
-		var data = $.param(
-            {
-                "empDept.deptId": $('#empDept\\.deptId option:selected').val(),
-                "id": empId,
-                "firstName": $('#firstName').val(),
-                "lastName": $('#lastName').val(),
-                "email": $('#email').val(),
-                "gender": $('input[name=gender]:checked').val()
-    });
+//		var data = $.param(
+//            {
+//                "empDept.deptId": $('#empDept\\.deptId option:selected').val(),
+//                "id": empId,
+//                "firstName": $('#firstName').val(),
+//                "lastName": $('#lastName').val(),
+//                "email": $('#email').val(),
+//                "gender": $('input[name=gender]:checked').val()
+//    });
+		var data = $('form').serialize();
 		console.log("PUT: " + data);
         $.ajax({
             url: '${pageContext.request.contextPath}/api/rest/updateEmp/' + empId,
@@ -34,8 +35,8 @@
             data: data,
             success: function(result) {
                 if(result == empId) {
-					// location.href = "getEmps";
-					console.log("PUT Response: " + result);
+                    console.log("PUT Response: " + result);
+                    location.href = "${pageContext.request.contextPath}/api/rest/getEmps";
                 }
             }
         });
@@ -47,12 +48,12 @@
 		<div class="container">
 			<%--<c:out value="${emp}" />--%>
 			<h3>New Employee Information</h3>
-			<%
-				Emp emp = (Emp) request.getAttribute("emp");
-				String goToAction = emp.getId() == null || emp.getId().length() < 1 ? "/addEmp" : "/updateEmp/" + emp.getId();
-				request.setAttribute("goToAction",goToAction);
-			%>
-			<form:form action='${pageContext.request.contextPath}/api/rest${goToAction}' method="post" modelAttribute="emp">
+			<%--<%--%>
+				<%--Emp emp = (Emp) request.getAttribute("emp");--%>
+				<%--String goToAction = emp.getId() == null || emp.getId().length() < 1 ? "/addEmp" : "/updateEmp/" + emp.getId();--%>
+				<%--request.setAttribute("goToAction",goToAction);--%>
+			<%--%>--%>
+			<form:form action='${pageContext.request.contextPath}/api/rest/addEmp' method="post" modelAttribute="emp">
 				<table class="table table-hover">
 
 					<c:if test="${emp.id != null && emp.id.length() > 0}">
