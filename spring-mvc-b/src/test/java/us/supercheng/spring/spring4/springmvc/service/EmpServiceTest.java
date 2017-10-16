@@ -28,7 +28,7 @@ public class EmpServiceTest {
 
     @Test
     public void b_get_Test() {
-        System.out.println("Get: " + this.empService.getEmp("13"));
+        System.out.println("Get: " + this.empService.getEmpJSON("13"));
     }
 
     @Test

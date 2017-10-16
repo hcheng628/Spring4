@@ -26,12 +26,16 @@ public class EmpService {
         return this.empDao.addEmpDao(newEmp);
     }
 
-    public String getEmp(String empId) {
+    public String getEmpJSON(String empId) {
         try {
             return this.objectMapperJSON.writeValueAsString(this.empDao.getEmpDao(empId));
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    public Emp getEmp(String empId) {
+        return this.empDao.getEmpDao(empId);
     }
 
     public String updateEmp(Emp updateEmp) {

@@ -72,10 +72,10 @@
 					<a class="form-control btn btn-success" onclick="getEmpCall()">Search</a>
 				</div>
 				<div class="form-group">
-					<a class="form-control btn btn-info" onclick="test()">Reset</a>
+					<a class="form-control btn btn-danger" onclick="test()">Reset</a>
 				</div>
 				<div class="form-group">
-					<a class="form-control btn btn-secondary" href="createEmp">Create Employee</a>
+					<a class="form-control btn btn-info" href="createEmp">Create Employee</a>
 				</div>
 			</form>
 			<table class="table table-hover">
@@ -112,7 +112,7 @@
 								<c:out value="${eachEmp.empDept.deptName}" />
 							</td>
 							<td>
-								<a class="btn btn-primary">Edit</a>
+								<a class="btn btn-primary" href="updateEmp/${eachEmp.id}">Edit</a>
 							</td>
 							<td>
 								<a class="btn btn-danger" onclick="delEmpCall(${eachEmp.id})">Delete</a>

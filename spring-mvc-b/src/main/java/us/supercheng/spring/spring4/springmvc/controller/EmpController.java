@@ -37,14 +37,14 @@ public class EmpController {
 
     @GetMapping("/getEmp/{id}")
     public String getEmp(@PathVariable String id) {
-        return empService.getEmp(id);
+        return empService.getEmpJSON(id);
     }
 
-    //@PutMapping("/updateEmp")
-    @RequestMapping(value = "/updateEmp", method = RequestMethod.POST)
-    public ModelAndView updateEmp(Emp emp) {
-        this.empService.updateEmp(emp);
-        return new ModelAndView("redirect:/api/rest/getEmps");
+    @PutMapping("/updateEmp/{id}")
+    //@RequestMapping(value = "/updateEmp/{id}", method = RequestMethod.PUT)
+    public String updateEmp(@PathVariable String id, Emp emp) {
+        System.out.println("RequestMethod.PUT" + emp);
+        return this.empService.updateEmp(emp);
     }
 
     @DeleteMapping("/delEmp/{id}")
@@ -63,6 +63,17 @@ public class EmpController {
     public ModelAndView createEmp(ModelAndView modelAndView) {
         modelAndView.addObject("depts", this.deptService.getAllDepts());
         modelAndView.addObject("emp", new Emp());
+        modelAndView.setViewName("emp");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/updateEmp/{id}", method = RequestMethod.GET)
+    public ModelAndView editEmp(@PathVariable("id") String empId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("depts", this.deptService.getAllDepts());
+        Emp emp = this.empService.getEmp(empId);
+        System.out.println("Update: " + emp);
+        modelAndView.addObject("emp", emp);
         modelAndView.setViewName("emp");
         return modelAndView;
     }
