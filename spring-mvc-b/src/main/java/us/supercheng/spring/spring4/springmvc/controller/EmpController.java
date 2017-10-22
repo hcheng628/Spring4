@@ -102,9 +102,13 @@ public class EmpController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/test/customEmpConverter")
+    @RequestMapping(value = "/test/customEmpConverter", method = RequestMethod.GET)
     public String customEmpConverter(@RequestParam("employee") Emp emp ) {
-        System.out.println(emp);
-        return "list";
+        for (Dept each: this.deptService.getAllDepts()) {
+            if ((each.getDeptId()+"").equalsIgnoreCase(emp.getEmpDept().getDeptId())) {
+                emp.setEmpDept(each);
+            }
+        }
+        return emp.toString();
     }
 }
