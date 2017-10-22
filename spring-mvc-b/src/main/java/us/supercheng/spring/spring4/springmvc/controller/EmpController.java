@@ -101,4 +101,10 @@ public class EmpController {
         modelAndView.setViewName("emp");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/test/customEmpConverter")
+    public String customEmpConverter(@RequestParam("employee") Emp emp ) {
+        System.out.println(emp);
+        return "list";
+    }
 }

@@ -10,5 +10,7 @@
 </head>
 <body>
         <a href="api/rest/getEmps">Employee Services</a>
+        <br><br>
+        <a href="api/rest/test/customEmpConverter?employee=1-first-last-email-1-1">Custom Emp Converter Test</a>
 </body>
 </html>
