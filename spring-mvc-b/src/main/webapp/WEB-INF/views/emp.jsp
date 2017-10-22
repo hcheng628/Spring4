@@ -97,6 +97,21 @@
 							<form:radiobuttons path="gender" items="${genderMap}"/>
 						</td>
 					</tr>
+
+					<tr>
+						<td>Date of Birth</td>
+						<td>
+							<from:input path="dob" class="form-control" />
+						</td>
+					</tr>
+
+					<tr>
+						<td>Salary</td>
+						<td>
+							<from:input path="salary" class="form-control" />
+						</td>
+					</tr>
+
 					<tr>
 						<td>Department</td>
 						<td>
@@ -107,14 +122,12 @@
 					</tr>
 					<tr>
 						<td>
-
 							<c:if test="${emp.id == null}">
 								<input class="btn btn-success" type="submit" value="Create" />
 							</c:if>
 							<c:if test="${emp.id != null}">
 								<a class="btn btn-success" onclick="updateCall(${emp.id})">Update</a>
 							</c:if>
-
 						</td>
 					</tr>
 				</table>
