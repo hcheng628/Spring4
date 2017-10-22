@@ -2,6 +2,8 @@ package us.supercheng.spring.spring4.springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +11,8 @@ import us.supercheng.spring.spring4.springmvc.entity.Dept;
 import us.supercheng.spring.spring4.springmvc.entity.Emp;
 import us.supercheng.spring.spring4.springmvc.service.DeptService;
 import us.supercheng.spring.spring4.springmvc.service.EmpService;
+
+import javax.validation.Valid;
 import java.util.Map;
 
 @RequestMapping("/api/rest")
@@ -33,7 +37,15 @@ public class EmpController {
 
     //@PostMapping("/addEmp")
     @RequestMapping(value = "/addEmp", method = RequestMethod.POST)
-    public ModelAndView addEmp(Emp emp) {
+    public ModelAndView addEmp(@Valid @ModelAttribute("emp") Emp emp, BindingResult bindingResult) {
+        System.out.println("New Eemp: " + emp);
+        if(bindingResult.hasErrors()) {
+            for(ObjectError each : bindingResult.getAllErrors()){
+                System.out.println("Each Error: " + each);
+            }
+            return new ModelAndView("emp");
+        }
+
         for (Dept eachDept : this.deptService.getAllDepts()) {
             if (emp.getEmpDept().getDeptId().equalsIgnoreCase(eachDept.getDeptId())) {
                 emp.getEmpDept().setDeptName(eachDept.getDeptName());
@@ -115,6 +127,6 @@ public class EmpController {
 
     @InitBinder
     public void customInitBinder(WebDataBinder webDataBinder) {
-        webDataBinder.setDisallowedFields("email");
+        webDataBinder.setDisallowedFields("id");
     }
 }

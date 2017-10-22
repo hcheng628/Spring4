@@ -24,7 +24,8 @@
     <!-- Spring -->
     <spring-version>4.3.3.RELEASE</spring-version>
     <commons-logging.version>1.1.3</commons-logging.version>
-
+    <validation-api.verion>1.1.0.Final</validation-api.verion>
+    <validation-hibernate.version>5.3.5.Final</validation-hibernate.version>
     <!-- Jackson -->
     <jackson.version>2.6.0</jackson.version>
 
@@ -165,6 +166,18 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${spring-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>${validation-api.verion}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${validation-hibernate.version}</version>
     </dependency>
     <!-- Spring AOP & WebMVC & JDBC END -->
 

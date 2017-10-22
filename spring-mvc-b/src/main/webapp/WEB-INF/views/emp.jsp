@@ -83,6 +83,7 @@
 						<td>E-mail</td>
 						<td>
 							<form:input type="text" path="email" class="form-control" />
+							<form:errors path="email" class="text-danger"></form:errors>
 						</td>
 					</tr>
 					<tr>
@@ -95,6 +96,8 @@
 						%>
 						<td>
 							<form:radiobuttons path="gender" items="${genderMap}"/>
+							<form:errors path="gender" class="text-danger"></form:errors>
+
 						</td>
 					</tr>
 
@@ -102,6 +105,7 @@
 						<td>Date of Birth</td>
 						<td>
 							<from:input path="dob" class="form-control" />
+							<form:errors path="dob" class="text-danger"></form:errors>
 						</td>
 					</tr>
 

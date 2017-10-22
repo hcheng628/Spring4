@@ -1,19 +1,32 @@
 package us.supercheng.spring.spring4.springmvc.entity;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class Emp {
     private String id;
     private String firstName;
     private String lastName;
+
+    @Email
+    @NotEmpty
     private String email;
+
+    @Max(1)
+    @Min(0)
     private Integer gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past
     private Date dob;
+
     @NumberFormat(pattern = "#,###,###.##")
     private Double salary;
 
