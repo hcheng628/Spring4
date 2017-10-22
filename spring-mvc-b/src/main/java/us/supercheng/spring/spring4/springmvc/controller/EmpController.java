@@ -2,6 +2,7 @@ package us.supercheng.spring.spring4.springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import us.supercheng.spring.spring4.springmvc.entity.Dept;
@@ -110,5 +111,10 @@ public class EmpController {
             }
         }
         return emp.toString();
+    }
+
+    @InitBinder
+    public void customInitBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setDisallowedFields("email");
     }
 }
