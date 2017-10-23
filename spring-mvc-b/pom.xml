@@ -179,6 +179,11 @@
       <artifactId>hibernate-validator</artifactId>
       <version>${validation-hibernate.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator-annotation-processor</artifactId>
+      <version>${validation-hibernate.version}</version>
+    </dependency>
     <!-- Spring AOP & WebMVC & JDBC END -->
 
     <!-- Jackson -->

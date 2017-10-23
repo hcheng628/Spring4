@@ -15,8 +15,8 @@ public class Emp {
     private String firstName;
     private String lastName;
 
-    @Email
-    @NotEmpty
+    @Email(message = "{Email.emp.email}")
+    @NotEmpty(message = "{Email.emp.email}")
     private String email;
 
     @Max(1)
@@ -24,7 +24,7 @@ public class Emp {
     private Integer gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Past
+    @Past(message = "{Past.emp.dob}")
     private Date dob;
 
     @NumberFormat(pattern = "#,###,###.##")
