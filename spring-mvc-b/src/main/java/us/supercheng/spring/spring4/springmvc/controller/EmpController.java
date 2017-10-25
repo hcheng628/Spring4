@@ -1,6 +1,9 @@
 package us.supercheng.spring.spring4.springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -12,7 +15,10 @@ import us.supercheng.spring.spring4.springmvc.entity.Emp;
 import us.supercheng.spring.spring4.springmvc.service.DeptService;
 import us.supercheng.spring.spring4.springmvc.service.EmpService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/api/rest")
@@ -128,5 +134,30 @@ public class EmpController {
     @InitBinder
     public void customInitBinder(WebDataBinder webDataBinder) {
         webDataBinder.setDisallowedFields("id");
+    }
+
+
+    @RequestMapping(value = "/test/ObjectToJson")
+    @ResponseBody
+    public List<Emp> getEmps() {
+        return this.empService.getEmps();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/test/getFileInfo", method = RequestMethod.POST)
+    public String doGetFileInfo(@RequestBody String requestBody) {
+        return requestBody;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/test/doDownloadFile", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> doDownloadFile(HttpSession session) throws Exception {
+        String fileFullName = "MyDream.txt";
+        InputStream fileInputStream = session.getServletContext().getResourceAsStream("/files/dream.txt");
+        byte[] file = new byte[fileInputStream.available()];
+        fileInputStream.read(file);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Content-Disposition","attachment; filename=" + fileFullName);
+        return new ResponseEntity<byte[]>(file,httpHeaders, HttpStatus.OK);
     }
 }
