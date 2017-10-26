@@ -2,10 +2,7 @@ package us.supercheng.spring.spring4.springmvc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -14,7 +11,9 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import us.supercheng.spring.spring4.springmvc.service.EmpConversionService;
 
@@ -65,20 +64,20 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 //        return conversionServiceFactoryBean;
 //    }
 
-//    @Bean
-//    public ResourceBundleMessageSource getMessageSource(){
-//        ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
-//        resourceBundleMessageSource.setBasename("i18n");
-//        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
-//        return resourceBundleMessageSource;
-//    }
-
     @Bean
-    public ReloadableResourceBundleMessageSource getReloadableResourceBundleMessageSource() {
-        ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
-        reloadableResourceBundleMessageSource.setBasename("classpath:i18n");
-        return reloadableResourceBundleMessageSource;
+    public ResourceBundleMessageSource getMessageSource(){
+        ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
+        resourceBundleMessageSource.setBasename("i18n");
+        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+        return resourceBundleMessageSource;
     }
+
+//    @Bean
+//    public ReloadableResourceBundleMessageSource getReloadableResourceBundleMessageSource() {
+//        ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
+//        reloadableResourceBundleMessageSource.setBasename("classpath:i18n");
+//        return reloadableResourceBundleMessageSource;
+//    }
 
 //    @Bean
 //    public LocalValidatorFactoryBean getLocalValidatorFactoryBean() {
@@ -95,7 +94,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public Validator getValidator() {
         LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
-        validatorFactoryBean.setValidationMessageSource((MessageSource) getReloadableResourceBundleMessageSource());
+        validatorFactoryBean.setValidationMessageSource((MessageSource) getMessageSource());
         return validatorFactoryBean;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("localeCode");
+        registry.addInterceptor(localeChangeInterceptor);
     }
 }

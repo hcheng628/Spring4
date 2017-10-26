@@ -26,6 +26,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
         System.out.println("Custom Filter Init");
+        servletContext.setInitParameter("javax.servlet.jsp.jstl.fmt.localizationContext",
+              "i18n");
         servletContext.addFilter("HiddenHttpMethodFilter", HiddenHttpMethodFilter.class)
                 .addMappingForUrlPatterns(null, false, "/*");
     }

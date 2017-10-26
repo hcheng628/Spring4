@@ -18,7 +18,9 @@ import us.supercheng.spring.spring4.springmvc.service.EmpService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @RequestMapping("/api/rest")
@@ -159,5 +161,18 @@ public class EmpController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Disposition","attachment; filename=" + fileFullName);
         return new ResponseEntity<byte[]>(file,httpHeaders, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/test/changeLocale", method = RequestMethod.GET)
+    public String doChangeLocale(@RequestParam("newLocale") String newLocaleStr, HttpSession session, Locale locale) {
+        System.out.println("Enter doChangeLocale......");
+        if (newLocaleStr!=null && newLocaleStr.length()>0) {
+            System.out.println("Current Locale: " + session.getAttribute("currentLocale"));
+            locale = Locale.forLanguageTag(newLocaleStr);
+            session.setAttribute("currentLocale", newLocaleStr);
+            System.out.println("New Locale: " + session.getAttribute("currentLocale"));
+        }
+        return newLocaleStr;
     }
 }
