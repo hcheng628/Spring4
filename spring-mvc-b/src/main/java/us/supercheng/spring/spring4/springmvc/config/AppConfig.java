@@ -10,6 +10,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -70,6 +71,13 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         resourceBundleMessageSource.setBasename("i18n");
         resourceBundleMessageSource.setDefaultEncoding("UTF-8");
         return resourceBundleMessageSource;
+    }
+
+    @Bean("multipartResolver")
+    public CommonsMultipartResolver getCommonsMultipartResolver() {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        commonsMultipartResolver.setDefaultEncoding("UTF-8");
+        return commonsMultipartResolver;
     }
 
 //    @Bean

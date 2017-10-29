@@ -9,16 +9,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import us.supercheng.spring.spring4.springmvc.entity.Dept;
 import us.supercheng.spring.spring4.springmvc.entity.Emp;
 import us.supercheng.spring.spring4.springmvc.service.DeptService;
 import us.supercheng.spring.spring4.springmvc.service.EmpService;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -41,7 +41,6 @@ public class EmpController {
             map.put("emp", this.empService.getEmp(id+""));
         }
     }
-
 
     //@PostMapping("/addEmp")
     @RequestMapping(value = "/addEmp", method = RequestMethod.POST)
@@ -75,7 +74,6 @@ public class EmpController {
     /*
         Emp as InputPara works for POST not PUT ;-(
      */
-
     //@PutMapping("/updateEmp/{id}")
     @RequestMapping(value = "/updateEmp/{id}", method = RequestMethod.PUT)
     public String updateEmp(@PathVariable("id") String id,
@@ -138,7 +136,6 @@ public class EmpController {
         webDataBinder.setDisallowedFields("id");
     }
 
-
     @RequestMapping(value = "/test/ObjectToJson")
     @ResponseBody
     public List<Emp> getEmps() {
@@ -152,6 +149,22 @@ public class EmpController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/test/doUploadFile", method = RequestMethod.POST)
+    public String doUploadFile (@RequestParam(value = "file", required = false) MultipartFile file,
+                                @RequestParam(value = "desc", required = false) String desc,
+                                HttpSession session) throws Exception {
+        if(file!= null) {
+            String uploadDirPath = session.getServletContext().getRealPath("/") + "upload/";
+            System.out.println("Desc: " + desc);
+            System.out.println("UploadFile: " + file);
+            System.out.println("Upload Dir: " + uploadDirPath);
+            file.transferTo(new File(uploadDirPath + file.getOriginalFilename()));
+            return "Upload File: " + file.getOriginalFilename() + " SUCCESS!";
+        }
+        return "No File to Upload";
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/test/doDownloadFile", method = RequestMethod.GET)
     public ResponseEntity<byte[]> doDownloadFile(HttpSession session) throws Exception {
         String fileFullName = "MyDream.txt";
@@ -162,7 +175,6 @@ public class EmpController {
         httpHeaders.add("Content-Disposition","attachment; filename=" + fileFullName);
         return new ResponseEntity<byte[]>(file,httpHeaders, HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/test/changeLocale", method = RequestMethod.GET)
     public String doChangeLocale(@RequestParam("newLocale") String newLocaleStr, HttpSession session, Locale locale) {

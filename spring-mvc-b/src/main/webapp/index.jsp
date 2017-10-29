@@ -92,6 +92,27 @@
                 %>
                 ${sessionScope.currrentDateTime}
             </div>
+
+            <div class="col-md-9" style="margin-top: 30px;">
+                <form action="api/rest/test/doUploadFile" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div>
+                            <label for="fileUpload" class="btn btn-primary">
+                                <span>Upload Me</span>
+                                <input id="fileUpload" type="file" name="file" class="form-control" style="display: none">
+                            </label>
+                        </div>
+                        <div>
+                            <label for="fileDesc">File Desc: </label>
+                            <input id="fileDesc" type="text" name="desc" class="form-control">
+                        </div>
+                        <div>
+                            <input type="submit" value="Do Upload" class="form-control">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
 </body>

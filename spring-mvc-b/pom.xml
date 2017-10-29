@@ -24,6 +24,7 @@
     <!-- Spring -->
     <spring-version>4.3.3.RELEASE</spring-version>
     <commons-logging.version>1.1.3</commons-logging.version>
+    <commons-fileupload.version>1.3.1</commons-fileupload.version>
     <validation-api.verion>1.1.0.Final</validation-api.verion>
     <validation-hibernate.version>5.3.5.Final</validation-hibernate.version>
     <!-- Jackson -->
@@ -166,6 +167,12 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${spring-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>${commons-fileupload.version}</version>
     </dependency>
 
     <dependency>
