@@ -30,5 +30,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
               "i18n");
         servletContext.addFilter("HiddenHttpMethodFilter", HiddenHttpMethodFilter.class)
                 .addMappingForUrlPatterns(null, false, "/*");
+
     }
 }

@@ -16,6 +16,10 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import us.supercheng.spring.spring4.springmvc.interceptor.CustomHttpInterceptor;
+import us.supercheng.spring.spring4.springmvc.interceptor.FirstInterceptor;
+import us.supercheng.spring.spring4.springmvc.interceptor.SecondInterceptor;
+import us.supercheng.spring.spring4.springmvc.interceptor.ThirdInterceptor;
 import us.supercheng.spring.spring4.springmvc.service.EmpConversionService;
 
 import java.util.HashSet;
@@ -80,20 +84,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return commonsMultipartResolver;
     }
 
-//    @Bean
-//    public ReloadableResourceBundleMessageSource getReloadableResourceBundleMessageSource() {
-//        ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
-//        reloadableResourceBundleMessageSource.setBasename("classpath:i18n");
-//        return reloadableResourceBundleMessageSource;
-//    }
-
-//    @Bean
-//    public LocalValidatorFactoryBean getLocalValidatorFactoryBean() {
-//        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
-//        localValidatorFactoryBean.setValidationMessageSource(this.getReloadableResourceBundleMessageSource());
-//        return localValidatorFactoryBean;
-//    }
-
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new EmpConversionService());
@@ -111,5 +101,17 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("localeCode");
         registry.addInterceptor(localeChangeInterceptor);
+
+        CustomHttpInterceptor customHttpInterceptor = new CustomHttpInterceptor();
+        registry.addInterceptor(customHttpInterceptor).addPathPatterns("/api/rest/test/*");
+
+        FirstInterceptor firstInterceptor = new FirstInterceptor();
+        SecondInterceptor secondInterceptor = new SecondInterceptor();
+        ThirdInterceptor thirdInterceptor = new ThirdInterceptor();
+
+        registry.addInterceptor(firstInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
+        registry.addInterceptor(secondInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
+        registry.addInterceptor(thirdInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
+
     }
 }
