@@ -1,9 +1,12 @@
 package us.supercheng.spring.spring4.springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -15,6 +18,8 @@ import us.supercheng.spring.spring4.springmvc.entity.Dept;
 import us.supercheng.spring.spring4.springmvc.entity.Emp;
 import us.supercheng.spring.spring4.springmvc.service.DeptService;
 import us.supercheng.spring.spring4.springmvc.service.EmpService;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
@@ -32,6 +37,9 @@ public class EmpController {
 
     @Autowired
     private DeptService deptService;
+
+    @Autowired
+    private ResourceBundleMessageSource messageSource;
 
     @ModelAttribute
     public void getEmp(@RequestParam(value = "id", required = false) Integer id,
@@ -176,15 +184,43 @@ public class EmpController {
         return new ResponseEntity<byte[]>(file,httpHeaders, HttpStatus.OK);
     }
 
+//    @RequestMapping(value = "/test/changeLocale", method = RequestMethod.GET)
+//    public String doChangeLocale(Locale locale, HttpServletRequest request) {
+//        System.out.println("Enter doChangeLocale......" + locale.getCountry());
+//        String msg = this.messageSource.getMessage("app.current.dateTime", null, locale);
+//        Locale requestLocale = request.getLocale();
+//        System.out.println("Request Language: " + requestLocale);
+//        requestLocale = new Locale("zh", "CN");
+//        System.out.println("Request Language: " + request.getLocale());
+//        System.out.println("Current Language: " + msg);
+//        return "SUCCESS";
+//    }
+
     @RequestMapping(value = "/test/changeLocale", method = RequestMethod.GET)
-    public String doChangeLocale(@RequestParam("newLocale") String newLocaleStr, HttpSession session, Locale locale) {
-        System.out.println("Enter doChangeLocale......");
-        if (newLocaleStr!=null && newLocaleStr.length()>0) {
-            System.out.println("Current Locale: " + session.getAttribute("currentLocale"));
-            locale = Locale.forLanguageTag(newLocaleStr);
-            session.setAttribute("currentLocale", newLocaleStr);
-            System.out.println("New Locale: " + session.getAttribute("currentLocale"));
-        }
-        return newLocaleStr;
+    public ModelAndView index(Locale locale, Model model){
+        // add parametrized message from controller
+        String welcome = messageSource.getMessage("app.current.dateTime", null, locale);
+        model.addAttribute("message", welcome);
+        // obtain locale from LocaleContextHolder
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        model.addAttribute("locale", currentLocale);
+        model.addAttribute("startMeeting", "10:30");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("international2");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/test/international1", method = RequestMethod.GET)
+    public ModelAndView international1(Locale locale, Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("international");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/test/international2", method = RequestMethod.GET)
+    public ModelAndView international2(Locale locale, Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("international2");
+        return modelAndView;
     }
 }

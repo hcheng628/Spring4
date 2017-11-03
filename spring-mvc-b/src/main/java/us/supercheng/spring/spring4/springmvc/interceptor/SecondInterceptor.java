@@ -10,7 +10,7 @@ public class SecondInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("SecondInterceptor preHandle Method");
-        return false;
+        return true;        // Play with this to see how it works with Mult-Interceptors
     }
 
     @Override

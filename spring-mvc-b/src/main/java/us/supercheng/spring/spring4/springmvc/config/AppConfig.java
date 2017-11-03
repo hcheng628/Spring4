@@ -1,12 +1,9 @@
 package us.supercheng.spring.spring4.springmvc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.MessageSource;
+//import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
-import org.springframework.context.support.ConversionServiceFactoryBean;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -14,7 +11,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import us.supercheng.spring.spring4.springmvc.interceptor.CustomHttpInterceptor;
 import us.supercheng.spring.spring4.springmvc.interceptor.FirstInterceptor;
@@ -22,23 +21,22 @@ import us.supercheng.spring.spring4.springmvc.interceptor.SecondInterceptor;
 import us.supercheng.spring.spring4.springmvc.interceptor.ThirdInterceptor;
 import us.supercheng.spring.spring4.springmvc.service.EmpConversionService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "us.supercheng.spring.spring4.springmvc")
 public class AppConfig extends WebMvcConfigurerAdapter {
 
-    private ResourceBundleMessageSource resourceBundleMessageSource;
+//    private ResourceBundleMessageSource resourceBundleMessageSource;
     private LocalValidatorFactoryBean localValidatorFactoryBean;
 
-    public ResourceBundleMessageSource getResourceBundleMessageSource() {
-        return resourceBundleMessageSource;
-    }
-    public void setResourceBundleMessageSource(ResourceBundleMessageSource resourceBundleMessageSource) {
-        this.resourceBundleMessageSource = resourceBundleMessageSource;
-    }
+//    public ResourceBundleMessageSource getResourceBundleMessageSource() {
+//        return resourceBundleMessageSource;
+//    }
+//    public void setResourceBundleMessageSource(ResourceBundleMessageSource resourceBundleMessageSource) {
+//        this.resourceBundleMessageSource = resourceBundleMessageSource;
+//    }
     public void setLocalValidatorFactoryBean(LocalValidatorFactoryBean localValidatorFactoryBean) {
         this.localValidatorFactoryBean = localValidatorFactoryBean;
     }
@@ -60,16 +58,22 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return new ObjectMapper();
     }
 
-//    @Bean(name = "conversionService")
-//    public ConversionServiceFactoryBean getEmpCustomConverter() {
-//        ConversionServiceFactoryBean conversionServiceFactoryBean = new ConversionServiceFactoryBean();
-//        Set<EmpConversionService> empConversionServiceSet = new HashSet<>();
-//        empConversionServiceSet.add(new EmpConversionService());
-//        conversionServiceFactoryBean.setConverters(empConversionServiceSet);
-//        return conversionServiceFactoryBean;
-//    }
+    @Bean("localeResolver")
+    public CookieLocaleResolver getSessionLocaleResolver() {
+        CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.ENGLISH);
+        localeResolver.setCookieName("my-locale-cookie");
+        localeResolver.setCookieMaxAge(3600);
+        return localeResolver;
+//        SessionLocaleResolver slr = new SessionLocaleResolver();
+//        slr.setDefaultLocale(Locale.US);
+//        return slr;
+//        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+//        sessionLocaleResolver.setDefaultLocale(new Locale("cn"));
+//        return sessionLocaleResolver;
+    }
 
-    @Bean
+    @Bean("messageSource")
     public ResourceBundleMessageSource getMessageSource(){
         ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
         resourceBundleMessageSource.setBasename("i18n");
@@ -84,6 +88,28 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return commonsMultipartResolver;
     }
 
+
+
+    @Bean("localeChangeInterceptor")
+    public LocaleChangeInterceptor getLocaleChangeInterceptor() {
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(getLocaleChangeInterceptor());
+        CustomHttpInterceptor customHttpInterceptor = new CustomHttpInterceptor();
+        FirstInterceptor firstInterceptor = new FirstInterceptor();
+        SecondInterceptor secondInterceptor = new SecondInterceptor();
+        ThirdInterceptor thirdInterceptor = new ThirdInterceptor();
+        registry.addInterceptor(customHttpInterceptor).addPathPatterns("/api/rest/test/*");
+        registry.addInterceptor(firstInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
+        registry.addInterceptor(secondInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
+        registry.addInterceptor(thirdInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
+    }
+
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new EmpConversionService());
@@ -92,26 +118,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public Validator getValidator() {
         LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
-        validatorFactoryBean.setValidationMessageSource((MessageSource) getMessageSource());
+        validatorFactoryBean.setValidationMessageSource(getMessageSource());
         return validatorFactoryBean;
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("localeCode");
-        registry.addInterceptor(localeChangeInterceptor);
-
-        CustomHttpInterceptor customHttpInterceptor = new CustomHttpInterceptor();
-        registry.addInterceptor(customHttpInterceptor).addPathPatterns("/api/rest/test/*");
-
-        FirstInterceptor firstInterceptor = new FirstInterceptor();
-        SecondInterceptor secondInterceptor = new SecondInterceptor();
-        ThirdInterceptor thirdInterceptor = new ThirdInterceptor();
-
-        registry.addInterceptor(firstInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
-        registry.addInterceptor(secondInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
-        registry.addInterceptor(thirdInterceptor).addPathPatterns().addPathPatterns("/api/rest/test/*");
-
     }
 }
