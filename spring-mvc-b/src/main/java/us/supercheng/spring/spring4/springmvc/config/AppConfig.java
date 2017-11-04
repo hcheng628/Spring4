@@ -11,6 +11,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -22,15 +23,14 @@ import us.supercheng.spring.spring4.springmvc.interceptor.ThirdInterceptor;
 import us.supercheng.spring.spring4.springmvc.service.EmpConversionService;
 
 import java.util.Locale;
+import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "us.supercheng.spring.spring4.springmvc")
 public class AppConfig extends WebMvcConfigurerAdapter {
-
 //    private ResourceBundleMessageSource resourceBundleMessageSource;
     private LocalValidatorFactoryBean localValidatorFactoryBean;
-
 //    public ResourceBundleMessageSource getResourceBundleMessageSource() {
 //        return resourceBundleMessageSource;
 //    }
@@ -44,6 +44,15 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return this.localValidatorFactoryBean;
     }
 
+    @Bean
+    public SimpleMappingExceptionResolver getSimpleMappingExceptionResolver() {
+        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+        Properties exceptionProps = new Properties();
+        exceptionProps.setProperty("java.lang.ArrayIndexOutOfBoundsException", "error");
+        resolver.setExceptionAttribute("errorMsg");
+        resolver.setExceptionMappings(exceptionProps);
+        return resolver;
+    }
 
     @Bean
     public InternalResourceViewResolver setInternalResourceViewResolver() {
@@ -87,8 +96,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         commonsMultipartResolver.setDefaultEncoding("UTF-8");
         return commonsMultipartResolver;
     }
-
-
 
     @Bean("localeChangeInterceptor")
     public LocaleChangeInterceptor getLocaleChangeInterceptor() {

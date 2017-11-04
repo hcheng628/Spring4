@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import us.supercheng.spring.spring4.springmvc.entity.Dept;
 import us.supercheng.spring.spring4.springmvc.entity.Emp;
+import us.supercheng.spring.spring4.springmvc.exception.CustomRuntimeException;
 import us.supercheng.spring.spring4.springmvc.service.DeptService;
 import us.supercheng.spring.spring4.springmvc.service.EmpService;
 
@@ -50,7 +51,6 @@ public class EmpController {
         }
     }
 
-    //@PostMapping("/addEmp")
     @RequestMapping(value = "/addEmp", method = RequestMethod.POST)
     public ModelAndView addEmp(@Valid @ModelAttribute("emp") Emp emp, BindingResult bindingResult) {
         System.out.println("New Eemp: " + emp);
@@ -184,18 +184,6 @@ public class EmpController {
         return new ResponseEntity<byte[]>(file,httpHeaders, HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "/test/changeLocale", method = RequestMethod.GET)
-//    public String doChangeLocale(Locale locale, HttpServletRequest request) {
-//        System.out.println("Enter doChangeLocale......" + locale.getCountry());
-//        String msg = this.messageSource.getMessage("app.current.dateTime", null, locale);
-//        Locale requestLocale = request.getLocale();
-//        System.out.println("Request Language: " + requestLocale);
-//        requestLocale = new Locale("zh", "CN");
-//        System.out.println("Request Language: " + request.getLocale());
-//        System.out.println("Current Language: " + msg);
-//        return "SUCCESS";
-//    }
-
     @RequestMapping(value = "/test/changeLocale", method = RequestMethod.GET)
     public ModelAndView index(Locale locale, Model model){
         // add parametrized message from controller
@@ -222,5 +210,52 @@ public class EmpController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("international2");
         return modelAndView;
+    }
+
+
+    // When Exception Occurs and cannot find @ExceptionHandler methods in this Class
+    // It will go find @ControllerAdvice class
+
+//    @ExceptionHandler(value = {RuntimeException.class})
+//    public ModelAndView doHandleRuntimeEx(Exception ex) {
+//        System.out.println("Runtime Exception Handler");
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("error");
+//        mv.addObject("errorMsg", ex);
+//        return mv;
+//    }
+//
+//    @ExceptionHandler(value = {ArithmeticException.class})
+//    public ModelAndView doHandleArithmeticEx(Exception ex) {
+//        System.out.println("Arithmetic Exception Handler");
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("error");
+//        mv.addObject("errorMsg", ex);
+//        return mv;
+//    }
+
+    @ResponseBody
+    @RequestMapping(value="/test/cal", method = RequestMethod.GET)
+    public String doCal(@RequestParam("i") int i) {
+        return 100 / i + "";
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/test/doBadRequest", method = RequestMethod.GET)
+    public String doCal() {
+        throw new CustomRuntimeException();
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/test/doDefaultHandlerExceptionResolver", method = RequestMethod.POST)
+    public String doDefaultHandlerExceptionResolver() {
+        throw new CustomRuntimeException();
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/test/simpleMapping", method = RequestMethod.GET)
+    public String doSimpleMapping(@RequestParam("i") int i) {
+        String[] arr = new String[3];
+        return arr[i];
     }
 }

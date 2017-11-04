@@ -69,6 +69,13 @@
                     </div>
                 </form>
             </div>
+
+            <div class="col-md-9" style="margin-top: 30px">
+                <a class="btn btn-danger" href="api/rest/test/cal?i=10">Test doCal ExceptionHandler</a><br>
+                <a class="btn btn-danger" href="api/rest/test/doBadRequest">Test doBadRequest ResponseStatusExceptionResolver</a><br>
+                <a class="btn btn-danger" href="api/rest/test/doDefaultHandlerExceptionResolver">Test doDefaultHandlerExceptionResolver</a><br>
+                <a class="btn btn-danger" href="api/rest/test/simpleMapping?i=4">Test doSimpleMappingExceptionResolver</a><br>
+            </div>
         </div>
     </div>
 </body>
