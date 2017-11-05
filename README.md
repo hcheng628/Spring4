@@ -20,8 +20,9 @@ It consists:
   
   4. Spring Form: Form Input -> Java Object(modelAttribute, path, cssClass. cssErrorClass,htmlEscape, form:input,radiobutton, errors, select ......)
   
-  5. DataBinding - Formatting - Validating: 	
-  	ServletRequest -> WebDataBinderFactory -> DataBinder -> ConversionService -> Validator -> BindingResult
+  5. DataBinding - Formatting - Validating:
+ 	
+	ServletRequest -> WebDataBinderFactory -> DataBinder -> ConversionService -> Validator -> BindingResult
   	Bind + Convert + Validate and Result. 
 	
 	a. Convert:
