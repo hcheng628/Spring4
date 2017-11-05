@@ -2,8 +2,6 @@ package us.supercheng.spring.spring4.springmvc.dao;
 
 import org.springframework.stereotype.Component;
 import us.supercheng.spring.spring4.springmvc.entity.Dept;
-import us.supercheng.spring.spring4.springmvc.entity.Emp;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +12,7 @@ public class DeptDao {
 
     public DeptDao() {
         super();
+        System.out.println("Init DeptDao");
         deptList = new ArrayList<Dept>();
         this.init();
     }

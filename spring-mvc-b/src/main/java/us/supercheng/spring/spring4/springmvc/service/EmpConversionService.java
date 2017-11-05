@@ -1,12 +1,9 @@
 package us.supercheng.spring.spring4.springmvc.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
-import us.supercheng.spring.spring4.springmvc.dao.DeptDao;
 import us.supercheng.spring.spring4.springmvc.entity.Dept;
 import us.supercheng.spring.spring4.springmvc.entity.Emp;
-import java.util.List;
 
 @Service
 public class EmpConversionService implements Converter<String, Emp> {

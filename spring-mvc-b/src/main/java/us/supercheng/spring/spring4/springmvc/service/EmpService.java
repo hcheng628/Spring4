@@ -20,6 +20,7 @@ public class EmpService {
 
     public EmpService() {
         super();
+        System.out.println("init EmpService");
     }
 
     public String addEmp(Emp newEmp) {

@@ -1,42 +1,32 @@
 package us.supercheng.spring.spring4.springmvc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import us.supercheng.spring.spring4.springmvc.interceptor.CustomHttpInterceptor;
 import us.supercheng.spring.spring4.springmvc.interceptor.FirstInterceptor;
 import us.supercheng.spring.spring4.springmvc.interceptor.SecondInterceptor;
 import us.supercheng.spring.spring4.springmvc.interceptor.ThirdInterceptor;
 import us.supercheng.spring.spring4.springmvc.service.EmpConversionService;
-
 import java.util.Locale;
 import java.util.Properties;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "us.supercheng.spring.spring4.springmvc")
+@ComponentScan(basePackages = "us.supercheng.spring.spring4.springmvc",
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = RestController.class))
 public class AppConfig extends WebMvcConfigurerAdapter {
-//    private ResourceBundleMessageSource resourceBundleMessageSource;
     private LocalValidatorFactoryBean localValidatorFactoryBean;
-//    public ResourceBundleMessageSource getResourceBundleMessageSource() {
-//        return resourceBundleMessageSource;
-//    }
-//    public void setResourceBundleMessageSource(ResourceBundleMessageSource resourceBundleMessageSource) {
-//        this.resourceBundleMessageSource = resourceBundleMessageSource;
-//    }
     public void setLocalValidatorFactoryBean(LocalValidatorFactoryBean localValidatorFactoryBean) {
         this.localValidatorFactoryBean = localValidatorFactoryBean;
     }

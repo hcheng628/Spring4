@@ -19,8 +19,6 @@ import us.supercheng.spring.spring4.springmvc.entity.Emp;
 import us.supercheng.spring.spring4.springmvc.exception.CustomRuntimeException;
 import us.supercheng.spring.spring4.springmvc.service.DeptService;
 import us.supercheng.spring.spring4.springmvc.service.EmpService;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
@@ -41,6 +39,11 @@ public class EmpController {
 
     @Autowired
     private ResourceBundleMessageSource messageSource;
+
+    public EmpController () {
+        super();
+        System.out.println("init EmpController");
+    }
 
     @ModelAttribute
     public void getEmp(@RequestParam(value = "id", required = false) Integer id,
