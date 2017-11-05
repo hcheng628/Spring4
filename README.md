@@ -21,17 +21,17 @@ It consists:
   4. Spring Form: Form Input -> Java Object(modelAttribute, path, cssClass. cssErrorClass,htmlEscape, form:input,radiobutton, errors, select ......)
   
   5. DataBinding - Formatting - Validating: 	
-  	* ServletRequest -> WebDataBinderFactory -> DataBinder -> ConversionService -> Validator -> BindingResult
-  	* Bind + Convert + Validate and Result. 
+  	ServletRequest -> WebDataBinderFactory -> DataBinder -> ConversionService -> Validator -> BindingResult
+  	Bind + Convert + Validate and Result. 
 	
-	Convert:
+	a. Convert:
   	CustomConversionService: Coverter<S,T>, ConverterFactory, GenericConverter
 	@InitBinder method to init WebDataBinder
 	
-	Format:
+	b. Format:
 	FormattingConversionService e.g. @DateTimeFormat(pattern, iso, style), @NumberFormat(Style.CURRENCY) apply to Entity Classes
 	
-	Validate:
+	c. Validate:
 	JSR 303 + Hibernate Validator + Spring LocalValidatorFactoryBean + @valid (@argument + BindingResult or Errors). 
 	JSP can also access thru form:error path="???"
 	Validation Annotation applies to Entity Classes
