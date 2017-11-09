@@ -1,0 +1,195 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.crif.cf.bmw.gbl</groupId>
+  <artifactId>CFProxy</artifactId>
+  <version>1.0.0</version>
+  <packaging>war</packaging>
+  <properties>
+    <!-- Env Settings -->
+    <java.version>1.8</java.version>
+
+    <!-- Maven-->
+    <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+    <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
+
+    <!-- US Common Lib & CF Settings -->
+    <us-common-lib.version>0.1.1-SNAPSHOT</us-common-lib.version>
+    <cfj.version>6.0.0-SNAPSHOT</cfj.version>
+
+    <!-- Logging -->
+    <log4j.version>1.2.17</log4j.version>
+
+    <!-- Spring -->
+    <spring-version>4.3.3.RELEASE</spring-version>
+    <commons-logging.version>1.1.3</commons-logging.version>
+
+    <!-- Jackson -->
+    <jackson.version>2.8.6</jackson.version>
+    <servlet.version>3.0.1</servlet.version>
+
+    <!-- DB -->
+    <c3p0-version>0.9.2</c3p0-version>
+    <sqlserver.sqljdbc4.version>4.0</sqlserver.sqljdbc4.version>
+
+    <!-- Testing -->
+    <junit-version>4.12</junit-version>
+
+  </properties>
+  <build>
+    <finalName>BMW-CFProxy</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <!-- CF & US Common Lib-->
+    <dependency>
+      <groupId>cfj_enginefacade_ejb</groupId>
+      <artifactId>cfj_enginefacade_ejb_api</artifactId>
+      <version>${cfj.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>cfj_engine_ejb</groupId>
+      <artifactId>cfj_engine_ejb_api</artifactId>
+      <version>${cfj.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>cfj_oru_ejb</groupId>
+      <artifactId>cfj_oru_ejb_api</artifactId>
+      <version>${cfj.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>cfj_common</groupId>
+      <artifactId>cfj_common_api</artifactId>
+      <version>${cfj.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>cfj-customview</groupId>
+      <artifactId>cfj-customview</artifactId>
+      <version>${cfj.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.crif.common</groupId>
+      <artifactId>us-common-lib</artifactId>
+      <version>${us-common-lib.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>cfj_engine_ejb</groupId>
+          <artifactId>cfj_engine_ejb_api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>cfj_enginefacade_ejb</groupId>
+          <artifactId>cfj_enginefacade_ejb_api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>cfj_oru_ejb</groupId>
+          <artifactId>cfj_oru_ejb_api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>cfj_common</groupId>
+          <artifactId>cfj_common_api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- Spring Base
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>${commons-logging.version}</version>
+    </dependency>
+    -->
+    <!-- Spring Base End -->
+
+    <!-- Spring AOP & WebMVC & JDBC
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring-version}</version>
+    </dependency>
+    <!-- Spring AOP & WebMVC & JDBC END -->
+
+    <!-- Jackson -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+  </dependencies>
+</project>
